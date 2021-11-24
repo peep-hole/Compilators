@@ -1,4 +1,5 @@
 PARSING_TABLE = {
+    "spaces": lambda x: True if all([True if el in [' ', '\n', '\t'] else False for el in x]) else False,
     "variable": lambda x: x.isalnum() and x[0].isalpha(),
     "number": lambda x: x.isdecimal(),
     "l_parenthesis": lambda x: x == '(',
@@ -8,6 +9,10 @@ PARSING_TABLE = {
     "subtract": lambda x: x == '-',
     "divide": lambda x: x == '/'
 }
+
+
+def check_number_and_variable_spacing(sentence, index):
+    return False
 
 
 def check(buffer):
@@ -34,16 +39,30 @@ def scanner(sentence, pos):
 
 
 def parser(sentence):
+    last_len = 0
+    last = 'none'
     pos = 0
     while pos < len(sentence):
         result = scanner(sentence, pos)
+        if result[0] == result[1] == '':
+            raise NameError(
+                f"{sentence}\n{' ' * 11 + ' ' * result[2] + '^'}\nUnknown type of token in column {result[2]}")
+        if result[1] == 'variable' and last == 'number':
+            raise NameError(
+                f"{sentence}\n{' ' * 11 + ' ' * (result[2]-len(result[0])-last_len) + '^'}\nVariable name can't start with number")
         print(result[0] + " | " + result[1])
         pos = result[2]
+        last = result[1]
+        last_len = len(result[0])
 
 
-phrase = "123*z1+2*(27-y22)"
+phrase = "123 * 12z1 + 2 * (27 - y22)"
+
 
 parser(phrase)
+
+
+
 
 
 # zbudowac parser/skaner do kolorowania skladni dla wybranego formatu np. c zapisany w txt
