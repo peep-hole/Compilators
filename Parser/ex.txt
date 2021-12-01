@@ -1,0 +1,9 @@
+for x in someset:
+    if x == 5: 
+        return 15  # return 15 if x equal 5
+    else:
+        break
+if x >= 0x1FE1: # this is loop
+    for example in x:   # this is for
+        if x < 15:
+            return 15.23
