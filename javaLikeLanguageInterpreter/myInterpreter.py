@@ -3,55 +3,6 @@ from visit import on, when
 import sys
 sys.setrecursionlimit(10000)
 
-
-class VariableSymbol(object):
-
-    def __init__(self, name, type):
-        self.name = name
-        self.type = type
-
-
-class SymbolTable(object):
-
-    def __init__(self, parent, name, calledFunction): # parent scope and symbol table name
-        self.parentScope = parent
-        self.symbols = {}
-        self.name = name
-        self.calledFunction = calledFunction
-        self.inLoop = False
-
-    def put(self, name, symbol): # put variable symbol or fundef under <name> entry
-        if self.shallowGet(name) is None:
-            self.symbols[name] = symbol
-        else:
-            raise ValueError
-
-    def shallowGet(self, name):
-        return self.symbols.get(name, None)
-
-    def printAll(self):
-        print(self.name, self.symbols)
-        if self.parentScope is not None:
-            self.parentScope.printAll()
-
-    def get(self, name): # get variable symbol or fundef from <name> entry
-        ourScopeSymbol = self.symbols.get(name, None)
-        if self.parentScope is not None:
-            parentScopeSymbol = self.getParentScope().get(name)
-        else:
-            parentScopeSymbol = None
-        if ourScopeSymbol is None and parentScopeSymbol is None:
-            return None
-
-        if ourScopeSymbol is None:
-            return parentScopeSymbol
-        else:
-            return ourScopeSymbol
-
-    def getParentScope(self):
-        return self.parentScope
-
-
 class Memory:
 
     def __init__(self, memory=None):
