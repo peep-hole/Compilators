@@ -1,0 +1,3554 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> program_element
+Rule 2     program -> program program_element
+Rule 3     program_element -> declaration
+Rule 4     program_element -> fundef
+Rule 5     program_element -> instruction
+Rule 6     declaration -> TYPE inits ;
+Rule 7     declaration -> error ;
+Rule 8     inits -> inits , init
+Rule 9     inits -> init
+Rule 10    init -> ID = expression
+Rule 11    instruction -> print_instr
+Rule 12    instruction -> labeled_instr
+Rule 13    instruction -> assignment
+Rule 14    instruction -> choice_instr
+Rule 15    instruction -> while_instr
+Rule 16    instruction -> return_instr
+Rule 17    instruction -> compound_instr
+Rule 18    print_instr -> PRINT expression ;
+Rule 19    print_instr -> PRINT error ;
+Rule 20    labeled_instr -> ID : instruction
+Rule 21    assignment -> ID = expression ;
+Rule 22    choice_instr -> IF ( condition ) instruction
+Rule 23    choice_instr -> IF ( condition ) instruction ELSE instruction
+Rule 24    choice_instr -> IF ( error ) instruction
+Rule 25    choice_instr -> IF ( error ) instruction ELSE instruction
+Rule 26    while_instr -> WHILE ( condition ) instruction
+Rule 27    while_instr -> WHILE ( error ) instruction
+Rule 28    return_instr -> RETURN expression ;
+Rule 29    declarations_or_instructions -> declarations_or_instructions declaration
+Rule 30    declarations_or_instructions -> declarations_or_instructions instruction
+Rule 31    declarations_or_instructions -> <empty>
+Rule 32    compound_instr -> { declarations_or_instructions }
+Rule 33    condition -> expression
+Rule 34    const -> INTEGER
+Rule 35    const -> FLOAT
+Rule 36    const -> STRING
+Rule 37    variable -> ID
+Rule 38    expression -> const
+Rule 39    expression -> variable
+Rule 40    expression -> arithmetic_expr
+Rule 41    expression -> logical_expr
+Rule 42    expression -> comparison_expr
+Rule 43    expression -> ( expression )
+Rule 44    expression -> ( error )
+Rule 45    expression -> funcall
+Rule 46    logical_expr -> expression AND expression
+Rule 47    logical_expr -> expression OR expression
+Rule 48    comparison_expr -> expression EQ expression
+Rule 49    comparison_expr -> expression NEQ expression
+Rule 50    comparison_expr -> expression > expression
+Rule 51    comparison_expr -> expression < expression
+Rule 52    comparison_expr -> expression LE expression
+Rule 53    comparison_expr -> expression GE expression
+Rule 54    arithmetic_expr -> expression + expression
+Rule 55    arithmetic_expr -> expression - expression
+Rule 56    arithmetic_expr -> expression * expression
+Rule 57    arithmetic_expr -> expression / expression
+Rule 58    arithmetic_expr -> expression % expression
+Rule 59    funcall -> ID ( expr_list_or_empty )
+Rule 60    funcall -> ID ( error )
+Rule 61    expr_list_or_empty -> expr_list
+Rule 62    expr_list_or_empty -> <empty>
+Rule 63    expr_list -> expr_list , expression
+Rule 64    expr_list -> expression
+Rule 65    fundef -> TYPE ID ( args_list_or_empty ) compound_instr
+Rule 66    args_list_or_empty -> args_list
+Rule 67    args_list_or_empty -> <empty>
+Rule 68    args_list -> args_list , arg
+Rule 69    args_list -> arg
+Rule 70    arg -> TYPE ID
+
+Terminals, with rules where they appear
+
+%                    : 58
+(                    : 22 23 24 25 26 27 43 44 59 60 65
+)                    : 22 23 24 25 26 27 43 44 59 60 65
+*                    : 56
++                    : 54
+,                    : 8 63 68
+-                    : 55
+/                    : 57
+:                    : 20
+;                    : 6 7 18 19 21 28
+<                    : 51
+=                    : 10 21
+>                    : 50
+AND                  : 46
+ELSE                 : 23 25
+EQ                   : 48
+FLOAT                : 35
+GE                   : 53
+ID                   : 10 20 21 37 59 60 65 70
+IF                   : 22 23 24 25
+INTEGER              : 34
+LE                   : 52
+NEQ                  : 49
+OR                   : 47
+PRINT                : 18 19
+RETURN               : 28
+STRING               : 36
+TYPE                 : 6 65 70
+WHILE                : 26 27
+error                : 7 19 24 25 27 44 60
+{                    : 32
+}                    : 32
+
+Nonterminals, with rules where they appear
+
+arg                  : 68 69
+args_list            : 66 68
+args_list_or_empty   : 65
+arithmetic_expr      : 40
+assignment           : 13
+choice_instr         : 14
+comparison_expr      : 42
+compound_instr       : 17 65
+condition            : 22 23 26
+const                : 38
+declaration          : 3 29
+declarations_or_instructions : 29 30 32
+expr_list            : 61 63
+expr_list_or_empty   : 59
+expression           : 10 18 21 28 33 43 46 46 47 47 48 48 49 49 50 50 51 51 52 52 53 53 54 54 55 55 56 56 57 57 58 58 63 64
+funcall              : 45
+fundef               : 4
+init                 : 8 9
+inits                : 6 8
+instruction          : 5 20 22 23 23 24 25 25 26 27 30
+labeled_instr        : 12
+logical_expr         : 41
+print_instr          : 11
+program              : 2 0
+program_element      : 1 2
+return_instr         : 16
+variable             : 39
+while_instr          : 15
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . program_element
+    (2) program -> . program program_element
+    (3) program_element -> . declaration
+    (4) program_element -> . fundef
+    (5) program_element -> . instruction
+    (6) declaration -> . TYPE inits ;
+    (7) declaration -> . error ;
+    (65) fundef -> . TYPE ID ( args_list_or_empty ) compound_instr
+    (11) instruction -> . print_instr
+    (12) instruction -> . labeled_instr
+    (13) instruction -> . assignment
+    (14) instruction -> . choice_instr
+    (15) instruction -> . while_instr
+    (16) instruction -> . return_instr
+    (17) instruction -> . compound_instr
+    (18) print_instr -> . PRINT expression ;
+    (19) print_instr -> . PRINT error ;
+    (20) labeled_instr -> . ID : instruction
+    (21) assignment -> . ID = expression ;
+    (22) choice_instr -> . IF ( condition ) instruction
+    (23) choice_instr -> . IF ( condition ) instruction ELSE instruction
+    (24) choice_instr -> . IF ( error ) instruction
+    (25) choice_instr -> . IF ( error ) instruction ELSE instruction
+    (26) while_instr -> . WHILE ( condition ) instruction
+    (27) while_instr -> . WHILE ( error ) instruction
+    (28) return_instr -> . RETURN expression ;
+    (32) compound_instr -> . { declarations_or_instructions }
+
+    TYPE            shift and go to state 6
+    error           shift and go to state 7
+    PRINT           shift and go to state 16
+    ID              shift and go to state 8
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    RETURN          shift and go to state 19
+    {               shift and go to state 20
+
+    program                        shift and go to state 1
+    program_element                shift and go to state 2
+    declaration                    shift and go to state 3
+    fundef                         shift and go to state 4
+    instruction                    shift and go to state 5
+    compound_instr                 shift and go to state 9
+    print_instr                    shift and go to state 10
+    labeled_instr                  shift and go to state 11
+    assignment                     shift and go to state 12
+    choice_instr                   shift and go to state 13
+    while_instr                    shift and go to state 14
+    return_instr                   shift and go to state 15
+
+state 1
+
+    (0) S' -> program .
+    (2) program -> program . program_element
+    (3) program_element -> . declaration
+    (4) program_element -> . fundef
+    (5) program_element -> . instruction
+    (6) declaration -> . TYPE inits ;
+    (7) declaration -> . error ;
+    (65) fundef -> . TYPE ID ( args_list_or_empty ) compound_instr
+    (11) instruction -> . print_instr
+    (12) instruction -> . labeled_instr
+    (13) instruction -> . assignment
+    (14) instruction -> . choice_instr
+    (15) instruction -> . while_instr
+    (16) instruction -> . return_instr
+    (17) instruction -> . compound_instr
+    (18) print_instr -> . PRINT expression ;
+    (19) print_instr -> . PRINT error ;
+    (20) labeled_instr -> . ID : instruction
+    (21) assignment -> . ID = expression ;
+    (22) choice_instr -> . IF ( condition ) instruction
+    (23) choice_instr -> . IF ( condition ) instruction ELSE instruction
+    (24) choice_instr -> . IF ( error ) instruction
+    (25) choice_instr -> . IF ( error ) instruction ELSE instruction
+    (26) while_instr -> . WHILE ( condition ) instruction
+    (27) while_instr -> . WHILE ( error ) instruction
+    (28) return_instr -> . RETURN expression ;
+    (32) compound_instr -> . { declarations_or_instructions }
+
+    TYPE            shift and go to state 6
+    error           shift and go to state 7
+    PRINT           shift and go to state 16
+    ID              shift and go to state 8
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    RETURN          shift and go to state 19
+    {               shift and go to state 20
+
+    program_element                shift and go to state 21
+    declaration                    shift and go to state 3
+    fundef                         shift and go to state 4
+    instruction                    shift and go to state 5
+    compound_instr                 shift and go to state 9
+    print_instr                    shift and go to state 10
+    labeled_instr                  shift and go to state 11
+    assignment                     shift and go to state 12
+    choice_instr                   shift and go to state 13
+    while_instr                    shift and go to state 14
+    return_instr                   shift and go to state 15
+
+state 2
+
+    (1) program -> program_element .
+
+    TYPE            reduce using rule 1 (program -> program_element .)
+    error           reduce using rule 1 (program -> program_element .)
+    PRINT           reduce using rule 1 (program -> program_element .)
+    ID              reduce using rule 1 (program -> program_element .)
+    IF              reduce using rule 1 (program -> program_element .)
+    WHILE           reduce using rule 1 (program -> program_element .)
+    RETURN          reduce using rule 1 (program -> program_element .)
+    {               reduce using rule 1 (program -> program_element .)
+    $end            reduce using rule 1 (program -> program_element .)
+
+
+state 3
+
+    (3) program_element -> declaration .
+
+    TYPE            reduce using rule 3 (program_element -> declaration .)
+    error           reduce using rule 3 (program_element -> declaration .)
+    PRINT           reduce using rule 3 (program_element -> declaration .)
+    ID              reduce using rule 3 (program_element -> declaration .)
+    IF              reduce using rule 3 (program_element -> declaration .)
+    WHILE           reduce using rule 3 (program_element -> declaration .)
+    RETURN          reduce using rule 3 (program_element -> declaration .)
+    {               reduce using rule 3 (program_element -> declaration .)
+    $end            reduce using rule 3 (program_element -> declaration .)
+
+
+state 4
+
+    (4) program_element -> fundef .
+
+    TYPE            reduce using rule 4 (program_element -> fundef .)
+    error           reduce using rule 4 (program_element -> fundef .)
+    PRINT           reduce using rule 4 (program_element -> fundef .)
+    ID              reduce using rule 4 (program_element -> fundef .)
+    IF              reduce using rule 4 (program_element -> fundef .)
+    WHILE           reduce using rule 4 (program_element -> fundef .)
+    RETURN          reduce using rule 4 (program_element -> fundef .)
+    {               reduce using rule 4 (program_element -> fundef .)
+    $end            reduce using rule 4 (program_element -> fundef .)
+
+
+state 5
+
+    (5) program_element -> instruction .
+
+    TYPE            reduce using rule 5 (program_element -> instruction .)
+    error           reduce using rule 5 (program_element -> instruction .)
+    PRINT           reduce using rule 5 (program_element -> instruction .)
+    ID              reduce using rule 5 (program_element -> instruction .)
+    IF              reduce using rule 5 (program_element -> instruction .)
+    WHILE           reduce using rule 5 (program_element -> instruction .)
+    RETURN          reduce using rule 5 (program_element -> instruction .)
+    {               reduce using rule 5 (program_element -> instruction .)
+    $end            reduce using rule 5 (program_element -> instruction .)
+
+
+state 6
+
+    (6) declaration -> TYPE . inits ;
+    (65) fundef -> TYPE . ID ( args_list_or_empty ) compound_instr
+    (8) inits -> . inits , init
+    (9) inits -> . init
+    (10) init -> . ID = expression
+
+    ID              shift and go to state 23
+
+    inits                          shift and go to state 22
+    init                           shift and go to state 24
+
+state 7
+
+    (7) declaration -> error . ;
+
+    ;               shift and go to state 25
+
+
+state 8
+
+    (20) labeled_instr -> ID . : instruction
+    (21) assignment -> ID . = expression ;
+
+    :               shift and go to state 26
+    =               shift and go to state 27
+
+
+state 9
+
+    (17) instruction -> compound_instr .
+
+    TYPE            reduce using rule 17 (instruction -> compound_instr .)
+    error           reduce using rule 17 (instruction -> compound_instr .)
+    PRINT           reduce using rule 17 (instruction -> compound_instr .)
+    ID              reduce using rule 17 (instruction -> compound_instr .)
+    IF              reduce using rule 17 (instruction -> compound_instr .)
+    WHILE           reduce using rule 17 (instruction -> compound_instr .)
+    RETURN          reduce using rule 17 (instruction -> compound_instr .)
+    {               reduce using rule 17 (instruction -> compound_instr .)
+    $end            reduce using rule 17 (instruction -> compound_instr .)
+    }               reduce using rule 17 (instruction -> compound_instr .)
+    ELSE            reduce using rule 17 (instruction -> compound_instr .)
+
+
+state 10
+
+    (11) instruction -> print_instr .
+
+    TYPE            reduce using rule 11 (instruction -> print_instr .)
+    error           reduce using rule 11 (instruction -> print_instr .)
+    PRINT           reduce using rule 11 (instruction -> print_instr .)
+    ID              reduce using rule 11 (instruction -> print_instr .)
+    IF              reduce using rule 11 (instruction -> print_instr .)
+    WHILE           reduce using rule 11 (instruction -> print_instr .)
+    RETURN          reduce using rule 11 (instruction -> print_instr .)
+    {               reduce using rule 11 (instruction -> print_instr .)
+    $end            reduce using rule 11 (instruction -> print_instr .)
+    }               reduce using rule 11 (instruction -> print_instr .)
+    ELSE            reduce using rule 11 (instruction -> print_instr .)
+
+
+state 11
+
+    (12) instruction -> labeled_instr .
+
+    TYPE            reduce using rule 12 (instruction -> labeled_instr .)
+    error           reduce using rule 12 (instruction -> labeled_instr .)
+    PRINT           reduce using rule 12 (instruction -> labeled_instr .)
+    ID              reduce using rule 12 (instruction -> labeled_instr .)
+    IF              reduce using rule 12 (instruction -> labeled_instr .)
+    WHILE           reduce using rule 12 (instruction -> labeled_instr .)
+    RETURN          reduce using rule 12 (instruction -> labeled_instr .)
+    {               reduce using rule 12 (instruction -> labeled_instr .)
+    $end            reduce using rule 12 (instruction -> labeled_instr .)
+    }               reduce using rule 12 (instruction -> labeled_instr .)
+    ELSE            reduce using rule 12 (instruction -> labeled_instr .)
+
+
+state 12
+
+    (13) instruction -> assignment .
+
+    TYPE            reduce using rule 13 (instruction -> assignment .)
+    error           reduce using rule 13 (instruction -> assignment .)
+    PRINT           reduce using rule 13 (instruction -> assignment .)
+    ID              reduce using rule 13 (instruction -> assignment .)
+    IF              reduce using rule 13 (instruction -> assignment .)
+    WHILE           reduce using rule 13 (instruction -> assignment .)
+    RETURN          reduce using rule 13 (instruction -> assignment .)
+    {               reduce using rule 13 (instruction -> assignment .)
+    $end            reduce using rule 13 (instruction -> assignment .)
+    }               reduce using rule 13 (instruction -> assignment .)
+    ELSE            reduce using rule 13 (instruction -> assignment .)
+
+
+state 13
+
+    (14) instruction -> choice_instr .
+
+    TYPE            reduce using rule 14 (instruction -> choice_instr .)
+    error           reduce using rule 14 (instruction -> choice_instr .)
+    PRINT           reduce using rule 14 (instruction -> choice_instr .)
+    ID              reduce using rule 14 (instruction -> choice_instr .)
+    IF              reduce using rule 14 (instruction -> choice_instr .)
+    WHILE           reduce using rule 14 (instruction -> choice_instr .)
+    RETURN          reduce using rule 14 (instruction -> choice_instr .)
+    {               reduce using rule 14 (instruction -> choice_instr .)
+    $end            reduce using rule 14 (instruction -> choice_instr .)
+    }               reduce using rule 14 (instruction -> choice_instr .)
+    ELSE            reduce using rule 14 (instruction -> choice_instr .)
+
+
+state 14
+
+    (15) instruction -> while_instr .
+
+    TYPE            reduce using rule 15 (instruction -> while_instr .)
+    error           reduce using rule 15 (instruction -> while_instr .)
+    PRINT           reduce using rule 15 (instruction -> while_instr .)
+    ID              reduce using rule 15 (instruction -> while_instr .)
+    IF              reduce using rule 15 (instruction -> while_instr .)
+    WHILE           reduce using rule 15 (instruction -> while_instr .)
+    RETURN          reduce using rule 15 (instruction -> while_instr .)
+    {               reduce using rule 15 (instruction -> while_instr .)
+    $end            reduce using rule 15 (instruction -> while_instr .)
+    }               reduce using rule 15 (instruction -> while_instr .)
+    ELSE            reduce using rule 15 (instruction -> while_instr .)
+
+
+state 15
+
+    (16) instruction -> return_instr .
+
+    TYPE            reduce using rule 16 (instruction -> return_instr .)
+    error           reduce using rule 16 (instruction -> return_instr .)
+    PRINT           reduce using rule 16 (instruction -> return_instr .)
+    ID              reduce using rule 16 (instruction -> return_instr .)
+    IF              reduce using rule 16 (instruction -> return_instr .)
+    WHILE           reduce using rule 16 (instruction -> return_instr .)
+    RETURN          reduce using rule 16 (instruction -> return_instr .)
+    {               reduce using rule 16 (instruction -> return_instr .)
+    $end            reduce using rule 16 (instruction -> return_instr .)
+    }               reduce using rule 16 (instruction -> return_instr .)
+    ELSE            reduce using rule 16 (instruction -> return_instr .)
+
+
+state 16
+
+    (18) print_instr -> PRINT . expression ;
+    (19) print_instr -> PRINT . error ;
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    error           shift and go to state 29
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 28
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 17
+
+    (22) choice_instr -> IF . ( condition ) instruction
+    (23) choice_instr -> IF . ( condition ) instruction ELSE instruction
+    (24) choice_instr -> IF . ( error ) instruction
+    (25) choice_instr -> IF . ( error ) instruction ELSE instruction
+
+    (               shift and go to state 41
+
+
+state 18
+
+    (26) while_instr -> WHILE . ( condition ) instruction
+    (27) while_instr -> WHILE . ( error ) instruction
+
+    (               shift and go to state 42
+
+
+state 19
+
+    (28) return_instr -> RETURN . expression ;
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 43
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 20
+
+    (32) compound_instr -> { . declarations_or_instructions }
+    (29) declarations_or_instructions -> . declarations_or_instructions declaration
+    (30) declarations_or_instructions -> . declarations_or_instructions instruction
+    (31) declarations_or_instructions -> .
+
+    }               reduce using rule 31 (declarations_or_instructions -> .)
+    TYPE            reduce using rule 31 (declarations_or_instructions -> .)
+    error           reduce using rule 31 (declarations_or_instructions -> .)
+    PRINT           reduce using rule 31 (declarations_or_instructions -> .)
+    ID              reduce using rule 31 (declarations_or_instructions -> .)
+    IF              reduce using rule 31 (declarations_or_instructions -> .)
+    WHILE           reduce using rule 31 (declarations_or_instructions -> .)
+    RETURN          reduce using rule 31 (declarations_or_instructions -> .)
+    {               reduce using rule 31 (declarations_or_instructions -> .)
+
+    declarations_or_instructions   shift and go to state 44
+
+state 21
+
+    (2) program -> program program_element .
+
+    TYPE            reduce using rule 2 (program -> program program_element .)
+    error           reduce using rule 2 (program -> program program_element .)
+    PRINT           reduce using rule 2 (program -> program program_element .)
+    ID              reduce using rule 2 (program -> program program_element .)
+    IF              reduce using rule 2 (program -> program program_element .)
+    WHILE           reduce using rule 2 (program -> program program_element .)
+    RETURN          reduce using rule 2 (program -> program program_element .)
+    {               reduce using rule 2 (program -> program program_element .)
+    $end            reduce using rule 2 (program -> program program_element .)
+
+
+state 22
+
+    (6) declaration -> TYPE inits . ;
+    (8) inits -> inits . , init
+
+    ;               shift and go to state 45
+    ,               shift and go to state 46
+
+
+state 23
+
+    (65) fundef -> TYPE ID . ( args_list_or_empty ) compound_instr
+    (10) init -> ID . = expression
+
+    (               shift and go to state 47
+    =               shift and go to state 48
+
+
+state 24
+
+    (9) inits -> init .
+
+    ;               reduce using rule 9 (inits -> init .)
+    ,               reduce using rule 9 (inits -> init .)
+
+
+state 25
+
+    (7) declaration -> error ; .
+
+    TYPE            reduce using rule 7 (declaration -> error ; .)
+    error           reduce using rule 7 (declaration -> error ; .)
+    PRINT           reduce using rule 7 (declaration -> error ; .)
+    ID              reduce using rule 7 (declaration -> error ; .)
+    IF              reduce using rule 7 (declaration -> error ; .)
+    WHILE           reduce using rule 7 (declaration -> error ; .)
+    RETURN          reduce using rule 7 (declaration -> error ; .)
+    {               reduce using rule 7 (declaration -> error ; .)
+    $end            reduce using rule 7 (declaration -> error ; .)
+    }               reduce using rule 7 (declaration -> error ; .)
+
+
+state 26
+
+    (20) labeled_instr -> ID : . instruction
+    (11) instruction -> . print_instr
+    (12) instruction -> . labeled_instr
+    (13) instruction -> . assignment
+    (14) instruction -> . choice_instr
+    (15) instruction -> . while_instr
+    (16) instruction -> . return_instr
+    (17) instruction -> . compound_instr
+    (18) print_instr -> . PRINT expression ;
+    (19) print_instr -> . PRINT error ;
+    (20) labeled_instr -> . ID : instruction
+    (21) assignment -> . ID = expression ;
+    (22) choice_instr -> . IF ( condition ) instruction
+    (23) choice_instr -> . IF ( condition ) instruction ELSE instruction
+    (24) choice_instr -> . IF ( error ) instruction
+    (25) choice_instr -> . IF ( error ) instruction ELSE instruction
+    (26) while_instr -> . WHILE ( condition ) instruction
+    (27) while_instr -> . WHILE ( error ) instruction
+    (28) return_instr -> . RETURN expression ;
+    (32) compound_instr -> . { declarations_or_instructions }
+
+    PRINT           shift and go to state 16
+    ID              shift and go to state 8
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    RETURN          shift and go to state 19
+    {               shift and go to state 20
+
+    instruction                    shift and go to state 49
+    print_instr                    shift and go to state 10
+    labeled_instr                  shift and go to state 11
+    assignment                     shift and go to state 12
+    choice_instr                   shift and go to state 13
+    while_instr                    shift and go to state 14
+    return_instr                   shift and go to state 15
+    compound_instr                 shift and go to state 9
+
+state 27
+
+    (21) assignment -> ID = . expression ;
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 50
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 28
+
+    (18) print_instr -> PRINT expression . ;
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               shift and go to state 51
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+    AND             shift and go to state 57
+    OR              shift and go to state 58
+    EQ              shift and go to state 59
+    NEQ             shift and go to state 60
+    >               shift and go to state 61
+    <               shift and go to state 62
+    LE              shift and go to state 63
+    GE              shift and go to state 64
+
+
+state 29
+
+    (19) print_instr -> PRINT error . ;
+
+    ;               shift and go to state 65
+
+
+state 30
+
+    (38) expression -> const .
+
+    ;               reduce using rule 38 (expression -> const .)
+    +               reduce using rule 38 (expression -> const .)
+    -               reduce using rule 38 (expression -> const .)
+    *               reduce using rule 38 (expression -> const .)
+    /               reduce using rule 38 (expression -> const .)
+    %               reduce using rule 38 (expression -> const .)
+    AND             reduce using rule 38 (expression -> const .)
+    OR              reduce using rule 38 (expression -> const .)
+    EQ              reduce using rule 38 (expression -> const .)
+    NEQ             reduce using rule 38 (expression -> const .)
+    >               reduce using rule 38 (expression -> const .)
+    <               reduce using rule 38 (expression -> const .)
+    LE              reduce using rule 38 (expression -> const .)
+    GE              reduce using rule 38 (expression -> const .)
+    )               reduce using rule 38 (expression -> const .)
+    ,               reduce using rule 38 (expression -> const .)
+
+
+state 31
+
+    (39) expression -> variable .
+
+    ;               reduce using rule 39 (expression -> variable .)
+    +               reduce using rule 39 (expression -> variable .)
+    -               reduce using rule 39 (expression -> variable .)
+    *               reduce using rule 39 (expression -> variable .)
+    /               reduce using rule 39 (expression -> variable .)
+    %               reduce using rule 39 (expression -> variable .)
+    AND             reduce using rule 39 (expression -> variable .)
+    OR              reduce using rule 39 (expression -> variable .)
+    EQ              reduce using rule 39 (expression -> variable .)
+    NEQ             reduce using rule 39 (expression -> variable .)
+    >               reduce using rule 39 (expression -> variable .)
+    <               reduce using rule 39 (expression -> variable .)
+    LE              reduce using rule 39 (expression -> variable .)
+    GE              reduce using rule 39 (expression -> variable .)
+    )               reduce using rule 39 (expression -> variable .)
+    ,               reduce using rule 39 (expression -> variable .)
+
+
+state 32
+
+    (40) expression -> arithmetic_expr .
+
+    ;               reduce using rule 40 (expression -> arithmetic_expr .)
+    +               reduce using rule 40 (expression -> arithmetic_expr .)
+    -               reduce using rule 40 (expression -> arithmetic_expr .)
+    *               reduce using rule 40 (expression -> arithmetic_expr .)
+    /               reduce using rule 40 (expression -> arithmetic_expr .)
+    %               reduce using rule 40 (expression -> arithmetic_expr .)
+    AND             reduce using rule 40 (expression -> arithmetic_expr .)
+    OR              reduce using rule 40 (expression -> arithmetic_expr .)
+    EQ              reduce using rule 40 (expression -> arithmetic_expr .)
+    NEQ             reduce using rule 40 (expression -> arithmetic_expr .)
+    >               reduce using rule 40 (expression -> arithmetic_expr .)
+    <               reduce using rule 40 (expression -> arithmetic_expr .)
+    LE              reduce using rule 40 (expression -> arithmetic_expr .)
+    GE              reduce using rule 40 (expression -> arithmetic_expr .)
+    )               reduce using rule 40 (expression -> arithmetic_expr .)
+    ,               reduce using rule 40 (expression -> arithmetic_expr .)
+
+
+state 33
+
+    (41) expression -> logical_expr .
+
+    ;               reduce using rule 41 (expression -> logical_expr .)
+    +               reduce using rule 41 (expression -> logical_expr .)
+    -               reduce using rule 41 (expression -> logical_expr .)
+    *               reduce using rule 41 (expression -> logical_expr .)
+    /               reduce using rule 41 (expression -> logical_expr .)
+    %               reduce using rule 41 (expression -> logical_expr .)
+    AND             reduce using rule 41 (expression -> logical_expr .)
+    OR              reduce using rule 41 (expression -> logical_expr .)
+    EQ              reduce using rule 41 (expression -> logical_expr .)
+    NEQ             reduce using rule 41 (expression -> logical_expr .)
+    >               reduce using rule 41 (expression -> logical_expr .)
+    <               reduce using rule 41 (expression -> logical_expr .)
+    LE              reduce using rule 41 (expression -> logical_expr .)
+    GE              reduce using rule 41 (expression -> logical_expr .)
+    )               reduce using rule 41 (expression -> logical_expr .)
+    ,               reduce using rule 41 (expression -> logical_expr .)
+
+
+state 34
+
+    (42) expression -> comparison_expr .
+
+    ;               reduce using rule 42 (expression -> comparison_expr .)
+    +               reduce using rule 42 (expression -> comparison_expr .)
+    -               reduce using rule 42 (expression -> comparison_expr .)
+    *               reduce using rule 42 (expression -> comparison_expr .)
+    /               reduce using rule 42 (expression -> comparison_expr .)
+    %               reduce using rule 42 (expression -> comparison_expr .)
+    AND             reduce using rule 42 (expression -> comparison_expr .)
+    OR              reduce using rule 42 (expression -> comparison_expr .)
+    EQ              reduce using rule 42 (expression -> comparison_expr .)
+    NEQ             reduce using rule 42 (expression -> comparison_expr .)
+    >               reduce using rule 42 (expression -> comparison_expr .)
+    <               reduce using rule 42 (expression -> comparison_expr .)
+    LE              reduce using rule 42 (expression -> comparison_expr .)
+    GE              reduce using rule 42 (expression -> comparison_expr .)
+    )               reduce using rule 42 (expression -> comparison_expr .)
+    ,               reduce using rule 42 (expression -> comparison_expr .)
+
+
+state 35
+
+    (43) expression -> ( . expression )
+    (44) expression -> ( . error )
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    error           shift and go to state 67
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 66
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 36
+
+    (45) expression -> funcall .
+
+    ;               reduce using rule 45 (expression -> funcall .)
+    +               reduce using rule 45 (expression -> funcall .)
+    -               reduce using rule 45 (expression -> funcall .)
+    *               reduce using rule 45 (expression -> funcall .)
+    /               reduce using rule 45 (expression -> funcall .)
+    %               reduce using rule 45 (expression -> funcall .)
+    AND             reduce using rule 45 (expression -> funcall .)
+    OR              reduce using rule 45 (expression -> funcall .)
+    EQ              reduce using rule 45 (expression -> funcall .)
+    NEQ             reduce using rule 45 (expression -> funcall .)
+    >               reduce using rule 45 (expression -> funcall .)
+    <               reduce using rule 45 (expression -> funcall .)
+    LE              reduce using rule 45 (expression -> funcall .)
+    GE              reduce using rule 45 (expression -> funcall .)
+    )               reduce using rule 45 (expression -> funcall .)
+    ,               reduce using rule 45 (expression -> funcall .)
+
+
+state 37
+
+    (34) const -> INTEGER .
+
+    ;               reduce using rule 34 (const -> INTEGER .)
+    +               reduce using rule 34 (const -> INTEGER .)
+    -               reduce using rule 34 (const -> INTEGER .)
+    *               reduce using rule 34 (const -> INTEGER .)
+    /               reduce using rule 34 (const -> INTEGER .)
+    %               reduce using rule 34 (const -> INTEGER .)
+    AND             reduce using rule 34 (const -> INTEGER .)
+    OR              reduce using rule 34 (const -> INTEGER .)
+    EQ              reduce using rule 34 (const -> INTEGER .)
+    NEQ             reduce using rule 34 (const -> INTEGER .)
+    >               reduce using rule 34 (const -> INTEGER .)
+    <               reduce using rule 34 (const -> INTEGER .)
+    LE              reduce using rule 34 (const -> INTEGER .)
+    GE              reduce using rule 34 (const -> INTEGER .)
+    )               reduce using rule 34 (const -> INTEGER .)
+    ,               reduce using rule 34 (const -> INTEGER .)
+
+
+state 38
+
+    (35) const -> FLOAT .
+
+    ;               reduce using rule 35 (const -> FLOAT .)
+    +               reduce using rule 35 (const -> FLOAT .)
+    -               reduce using rule 35 (const -> FLOAT .)
+    *               reduce using rule 35 (const -> FLOAT .)
+    /               reduce using rule 35 (const -> FLOAT .)
+    %               reduce using rule 35 (const -> FLOAT .)
+    AND             reduce using rule 35 (const -> FLOAT .)
+    OR              reduce using rule 35 (const -> FLOAT .)
+    EQ              reduce using rule 35 (const -> FLOAT .)
+    NEQ             reduce using rule 35 (const -> FLOAT .)
+    >               reduce using rule 35 (const -> FLOAT .)
+    <               reduce using rule 35 (const -> FLOAT .)
+    LE              reduce using rule 35 (const -> FLOAT .)
+    GE              reduce using rule 35 (const -> FLOAT .)
+    )               reduce using rule 35 (const -> FLOAT .)
+    ,               reduce using rule 35 (const -> FLOAT .)
+
+
+state 39
+
+    (36) const -> STRING .
+
+    ;               reduce using rule 36 (const -> STRING .)
+    +               reduce using rule 36 (const -> STRING .)
+    -               reduce using rule 36 (const -> STRING .)
+    *               reduce using rule 36 (const -> STRING .)
+    /               reduce using rule 36 (const -> STRING .)
+    %               reduce using rule 36 (const -> STRING .)
+    AND             reduce using rule 36 (const -> STRING .)
+    OR              reduce using rule 36 (const -> STRING .)
+    EQ              reduce using rule 36 (const -> STRING .)
+    NEQ             reduce using rule 36 (const -> STRING .)
+    >               reduce using rule 36 (const -> STRING .)
+    <               reduce using rule 36 (const -> STRING .)
+    LE              reduce using rule 36 (const -> STRING .)
+    GE              reduce using rule 36 (const -> STRING .)
+    )               reduce using rule 36 (const -> STRING .)
+    ,               reduce using rule 36 (const -> STRING .)
+
+
+state 40
+
+    (37) variable -> ID .
+    (59) funcall -> ID . ( expr_list_or_empty )
+    (60) funcall -> ID . ( error )
+
+    ;               reduce using rule 37 (variable -> ID .)
+    +               reduce using rule 37 (variable -> ID .)
+    -               reduce using rule 37 (variable -> ID .)
+    *               reduce using rule 37 (variable -> ID .)
+    /               reduce using rule 37 (variable -> ID .)
+    %               reduce using rule 37 (variable -> ID .)
+    AND             reduce using rule 37 (variable -> ID .)
+    OR              reduce using rule 37 (variable -> ID .)
+    EQ              reduce using rule 37 (variable -> ID .)
+    NEQ             reduce using rule 37 (variable -> ID .)
+    >               reduce using rule 37 (variable -> ID .)
+    <               reduce using rule 37 (variable -> ID .)
+    LE              reduce using rule 37 (variable -> ID .)
+    GE              reduce using rule 37 (variable -> ID .)
+    )               reduce using rule 37 (variable -> ID .)
+    ,               reduce using rule 37 (variable -> ID .)
+    (               shift and go to state 68
+
+
+state 41
+
+    (22) choice_instr -> IF ( . condition ) instruction
+    (23) choice_instr -> IF ( . condition ) instruction ELSE instruction
+    (24) choice_instr -> IF ( . error ) instruction
+    (25) choice_instr -> IF ( . error ) instruction ELSE instruction
+    (33) condition -> . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    error           shift and go to state 70
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    condition                      shift and go to state 69
+    expression                     shift and go to state 71
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 42
+
+    (26) while_instr -> WHILE ( . condition ) instruction
+    (27) while_instr -> WHILE ( . error ) instruction
+    (33) condition -> . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    error           shift and go to state 73
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    condition                      shift and go to state 72
+    expression                     shift and go to state 71
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 43
+
+    (28) return_instr -> RETURN expression . ;
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               shift and go to state 74
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+    AND             shift and go to state 57
+    OR              shift and go to state 58
+    EQ              shift and go to state 59
+    NEQ             shift and go to state 60
+    >               shift and go to state 61
+    <               shift and go to state 62
+    LE              shift and go to state 63
+    GE              shift and go to state 64
+
+
+state 44
+
+    (32) compound_instr -> { declarations_or_instructions . }
+    (29) declarations_or_instructions -> declarations_or_instructions . declaration
+    (30) declarations_or_instructions -> declarations_or_instructions . instruction
+    (6) declaration -> . TYPE inits ;
+    (7) declaration -> . error ;
+    (11) instruction -> . print_instr
+    (12) instruction -> . labeled_instr
+    (13) instruction -> . assignment
+    (14) instruction -> . choice_instr
+    (15) instruction -> . while_instr
+    (16) instruction -> . return_instr
+    (17) instruction -> . compound_instr
+    (18) print_instr -> . PRINT expression ;
+    (19) print_instr -> . PRINT error ;
+    (20) labeled_instr -> . ID : instruction
+    (21) assignment -> . ID = expression ;
+    (22) choice_instr -> . IF ( condition ) instruction
+    (23) choice_instr -> . IF ( condition ) instruction ELSE instruction
+    (24) choice_instr -> . IF ( error ) instruction
+    (25) choice_instr -> . IF ( error ) instruction ELSE instruction
+    (26) while_instr -> . WHILE ( condition ) instruction
+    (27) while_instr -> . WHILE ( error ) instruction
+    (28) return_instr -> . RETURN expression ;
+    (32) compound_instr -> . { declarations_or_instructions }
+
+    }               shift and go to state 75
+    TYPE            shift and go to state 78
+    error           shift and go to state 7
+    PRINT           shift and go to state 16
+    ID              shift and go to state 8
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    RETURN          shift and go to state 19
+    {               shift and go to state 20
+
+    declaration                    shift and go to state 76
+    instruction                    shift and go to state 77
+    print_instr                    shift and go to state 10
+    labeled_instr                  shift and go to state 11
+    assignment                     shift and go to state 12
+    choice_instr                   shift and go to state 13
+    while_instr                    shift and go to state 14
+    return_instr                   shift and go to state 15
+    compound_instr                 shift and go to state 9
+
+state 45
+
+    (6) declaration -> TYPE inits ; .
+
+    TYPE            reduce using rule 6 (declaration -> TYPE inits ; .)
+    error           reduce using rule 6 (declaration -> TYPE inits ; .)
+    PRINT           reduce using rule 6 (declaration -> TYPE inits ; .)
+    ID              reduce using rule 6 (declaration -> TYPE inits ; .)
+    IF              reduce using rule 6 (declaration -> TYPE inits ; .)
+    WHILE           reduce using rule 6 (declaration -> TYPE inits ; .)
+    RETURN          reduce using rule 6 (declaration -> TYPE inits ; .)
+    {               reduce using rule 6 (declaration -> TYPE inits ; .)
+    $end            reduce using rule 6 (declaration -> TYPE inits ; .)
+    }               reduce using rule 6 (declaration -> TYPE inits ; .)
+
+
+state 46
+
+    (8) inits -> inits , . init
+    (10) init -> . ID = expression
+
+    ID              shift and go to state 80
+
+    init                           shift and go to state 79
+
+state 47
+
+    (65) fundef -> TYPE ID ( . args_list_or_empty ) compound_instr
+    (66) args_list_or_empty -> . args_list
+    (67) args_list_or_empty -> .
+    (68) args_list -> . args_list , arg
+    (69) args_list -> . arg
+    (70) arg -> . TYPE ID
+
+    )               reduce using rule 67 (args_list_or_empty -> .)
+    TYPE            shift and go to state 81
+
+    args_list_or_empty             shift and go to state 82
+    args_list                      shift and go to state 83
+    arg                            shift and go to state 84
+
+state 48
+
+    (10) init -> ID = . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 85
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 49
+
+    (20) labeled_instr -> ID : instruction .
+
+    TYPE            reduce using rule 20 (labeled_instr -> ID : instruction .)
+    error           reduce using rule 20 (labeled_instr -> ID : instruction .)
+    PRINT           reduce using rule 20 (labeled_instr -> ID : instruction .)
+    ID              reduce using rule 20 (labeled_instr -> ID : instruction .)
+    IF              reduce using rule 20 (labeled_instr -> ID : instruction .)
+    WHILE           reduce using rule 20 (labeled_instr -> ID : instruction .)
+    RETURN          reduce using rule 20 (labeled_instr -> ID : instruction .)
+    {               reduce using rule 20 (labeled_instr -> ID : instruction .)
+    $end            reduce using rule 20 (labeled_instr -> ID : instruction .)
+    }               reduce using rule 20 (labeled_instr -> ID : instruction .)
+    ELSE            reduce using rule 20 (labeled_instr -> ID : instruction .)
+
+
+state 50
+
+    (21) assignment -> ID = expression . ;
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               shift and go to state 86
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+    AND             shift and go to state 57
+    OR              shift and go to state 58
+    EQ              shift and go to state 59
+    NEQ             shift and go to state 60
+    >               shift and go to state 61
+    <               shift and go to state 62
+    LE              shift and go to state 63
+    GE              shift and go to state 64
+
+
+state 51
+
+    (18) print_instr -> PRINT expression ; .
+
+    TYPE            reduce using rule 18 (print_instr -> PRINT expression ; .)
+    error           reduce using rule 18 (print_instr -> PRINT expression ; .)
+    PRINT           reduce using rule 18 (print_instr -> PRINT expression ; .)
+    ID              reduce using rule 18 (print_instr -> PRINT expression ; .)
+    IF              reduce using rule 18 (print_instr -> PRINT expression ; .)
+    WHILE           reduce using rule 18 (print_instr -> PRINT expression ; .)
+    RETURN          reduce using rule 18 (print_instr -> PRINT expression ; .)
+    {               reduce using rule 18 (print_instr -> PRINT expression ; .)
+    $end            reduce using rule 18 (print_instr -> PRINT expression ; .)
+    }               reduce using rule 18 (print_instr -> PRINT expression ; .)
+    ELSE            reduce using rule 18 (print_instr -> PRINT expression ; .)
+
+
+state 52
+
+    (54) arithmetic_expr -> expression + . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 87
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 53
+
+    (55) arithmetic_expr -> expression - . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 88
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 54
+
+    (56) arithmetic_expr -> expression * . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 89
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 55
+
+    (57) arithmetic_expr -> expression / . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 90
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 56
+
+    (58) arithmetic_expr -> expression % . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 91
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 57
+
+    (46) logical_expr -> expression AND . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 92
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 58
+
+    (47) logical_expr -> expression OR . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 93
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 59
+
+    (48) comparison_expr -> expression EQ . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 94
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 60
+
+    (49) comparison_expr -> expression NEQ . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 95
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 61
+
+    (50) comparison_expr -> expression > . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 96
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 62
+
+    (51) comparison_expr -> expression < . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 97
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 63
+
+    (52) comparison_expr -> expression LE . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 98
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 64
+
+    (53) comparison_expr -> expression GE . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 99
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 65
+
+    (19) print_instr -> PRINT error ; .
+
+    TYPE            reduce using rule 19 (print_instr -> PRINT error ; .)
+    error           reduce using rule 19 (print_instr -> PRINT error ; .)
+    PRINT           reduce using rule 19 (print_instr -> PRINT error ; .)
+    ID              reduce using rule 19 (print_instr -> PRINT error ; .)
+    IF              reduce using rule 19 (print_instr -> PRINT error ; .)
+    WHILE           reduce using rule 19 (print_instr -> PRINT error ; .)
+    RETURN          reduce using rule 19 (print_instr -> PRINT error ; .)
+    {               reduce using rule 19 (print_instr -> PRINT error ; .)
+    $end            reduce using rule 19 (print_instr -> PRINT error ; .)
+    }               reduce using rule 19 (print_instr -> PRINT error ; .)
+    ELSE            reduce using rule 19 (print_instr -> PRINT error ; .)
+
+
+state 66
+
+    (43) expression -> ( expression . )
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    )               shift and go to state 100
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+    AND             shift and go to state 57
+    OR              shift and go to state 58
+    EQ              shift and go to state 59
+    NEQ             shift and go to state 60
+    >               shift and go to state 61
+    <               shift and go to state 62
+    LE              shift and go to state 63
+    GE              shift and go to state 64
+
+
+state 67
+
+    (44) expression -> ( error . )
+
+    )               shift and go to state 101
+
+
+state 68
+
+    (59) funcall -> ID ( . expr_list_or_empty )
+    (60) funcall -> ID ( . error )
+    (61) expr_list_or_empty -> . expr_list
+    (62) expr_list_or_empty -> .
+    (63) expr_list -> . expr_list , expression
+    (64) expr_list -> . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    error           shift and go to state 103
+    )               reduce using rule 62 (expr_list_or_empty -> .)
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expr_list_or_empty             shift and go to state 102
+    expr_list                      shift and go to state 104
+    expression                     shift and go to state 105
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 69
+
+    (22) choice_instr -> IF ( condition . ) instruction
+    (23) choice_instr -> IF ( condition . ) instruction ELSE instruction
+
+    )               shift and go to state 106
+
+
+state 70
+
+    (24) choice_instr -> IF ( error . ) instruction
+    (25) choice_instr -> IF ( error . ) instruction ELSE instruction
+
+    )               shift and go to state 107
+
+
+state 71
+
+    (33) condition -> expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    )               reduce using rule 33 (condition -> expression .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+    AND             shift and go to state 57
+    OR              shift and go to state 58
+    EQ              shift and go to state 59
+    NEQ             shift and go to state 60
+    >               shift and go to state 61
+    <               shift and go to state 62
+    LE              shift and go to state 63
+    GE              shift and go to state 64
+
+
+state 72
+
+    (26) while_instr -> WHILE ( condition . ) instruction
+
+    )               shift and go to state 108
+
+
+state 73
+
+    (27) while_instr -> WHILE ( error . ) instruction
+
+    )               shift and go to state 109
+
+
+state 74
+
+    (28) return_instr -> RETURN expression ; .
+
+    TYPE            reduce using rule 28 (return_instr -> RETURN expression ; .)
+    error           reduce using rule 28 (return_instr -> RETURN expression ; .)
+    PRINT           reduce using rule 28 (return_instr -> RETURN expression ; .)
+    ID              reduce using rule 28 (return_instr -> RETURN expression ; .)
+    IF              reduce using rule 28 (return_instr -> RETURN expression ; .)
+    WHILE           reduce using rule 28 (return_instr -> RETURN expression ; .)
+    RETURN          reduce using rule 28 (return_instr -> RETURN expression ; .)
+    {               reduce using rule 28 (return_instr -> RETURN expression ; .)
+    $end            reduce using rule 28 (return_instr -> RETURN expression ; .)
+    }               reduce using rule 28 (return_instr -> RETURN expression ; .)
+    ELSE            reduce using rule 28 (return_instr -> RETURN expression ; .)
+
+
+state 75
+
+    (32) compound_instr -> { declarations_or_instructions } .
+
+    TYPE            reduce using rule 32 (compound_instr -> { declarations_or_instructions } .)
+    error           reduce using rule 32 (compound_instr -> { declarations_or_instructions } .)
+    PRINT           reduce using rule 32 (compound_instr -> { declarations_or_instructions } .)
+    ID              reduce using rule 32 (compound_instr -> { declarations_or_instructions } .)
+    IF              reduce using rule 32 (compound_instr -> { declarations_or_instructions } .)
+    WHILE           reduce using rule 32 (compound_instr -> { declarations_or_instructions } .)
+    RETURN          reduce using rule 32 (compound_instr -> { declarations_or_instructions } .)
+    {               reduce using rule 32 (compound_instr -> { declarations_or_instructions } .)
+    $end            reduce using rule 32 (compound_instr -> { declarations_or_instructions } .)
+    }               reduce using rule 32 (compound_instr -> { declarations_or_instructions } .)
+    ELSE            reduce using rule 32 (compound_instr -> { declarations_or_instructions } .)
+
+
+state 76
+
+    (29) declarations_or_instructions -> declarations_or_instructions declaration .
+
+    }               reduce using rule 29 (declarations_or_instructions -> declarations_or_instructions declaration .)
+    TYPE            reduce using rule 29 (declarations_or_instructions -> declarations_or_instructions declaration .)
+    error           reduce using rule 29 (declarations_or_instructions -> declarations_or_instructions declaration .)
+    PRINT           reduce using rule 29 (declarations_or_instructions -> declarations_or_instructions declaration .)
+    ID              reduce using rule 29 (declarations_or_instructions -> declarations_or_instructions declaration .)
+    IF              reduce using rule 29 (declarations_or_instructions -> declarations_or_instructions declaration .)
+    WHILE           reduce using rule 29 (declarations_or_instructions -> declarations_or_instructions declaration .)
+    RETURN          reduce using rule 29 (declarations_or_instructions -> declarations_or_instructions declaration .)
+    {               reduce using rule 29 (declarations_or_instructions -> declarations_or_instructions declaration .)
+
+
+state 77
+
+    (30) declarations_or_instructions -> declarations_or_instructions instruction .
+
+    }               reduce using rule 30 (declarations_or_instructions -> declarations_or_instructions instruction .)
+    TYPE            reduce using rule 30 (declarations_or_instructions -> declarations_or_instructions instruction .)
+    error           reduce using rule 30 (declarations_or_instructions -> declarations_or_instructions instruction .)
+    PRINT           reduce using rule 30 (declarations_or_instructions -> declarations_or_instructions instruction .)
+    ID              reduce using rule 30 (declarations_or_instructions -> declarations_or_instructions instruction .)
+    IF              reduce using rule 30 (declarations_or_instructions -> declarations_or_instructions instruction .)
+    WHILE           reduce using rule 30 (declarations_or_instructions -> declarations_or_instructions instruction .)
+    RETURN          reduce using rule 30 (declarations_or_instructions -> declarations_or_instructions instruction .)
+    {               reduce using rule 30 (declarations_or_instructions -> declarations_or_instructions instruction .)
+
+
+state 78
+
+    (6) declaration -> TYPE . inits ;
+    (8) inits -> . inits , init
+    (9) inits -> . init
+    (10) init -> . ID = expression
+
+    ID              shift and go to state 80
+
+    inits                          shift and go to state 22
+    init                           shift and go to state 24
+
+state 79
+
+    (8) inits -> inits , init .
+
+    ;               reduce using rule 8 (inits -> inits , init .)
+    ,               reduce using rule 8 (inits -> inits , init .)
+
+
+state 80
+
+    (10) init -> ID . = expression
+
+    =               shift and go to state 48
+
+
+state 81
+
+    (70) arg -> TYPE . ID
+
+    ID              shift and go to state 110
+
+
+state 82
+
+    (65) fundef -> TYPE ID ( args_list_or_empty . ) compound_instr
+
+    )               shift and go to state 111
+
+
+state 83
+
+    (66) args_list_or_empty -> args_list .
+    (68) args_list -> args_list . , arg
+
+    )               reduce using rule 66 (args_list_or_empty -> args_list .)
+    ,               shift and go to state 112
+
+
+state 84
+
+    (69) args_list -> arg .
+
+    ,               reduce using rule 69 (args_list -> arg .)
+    )               reduce using rule 69 (args_list -> arg .)
+
+
+state 85
+
+    (10) init -> ID = expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               reduce using rule 10 (init -> ID = expression .)
+    ,               reduce using rule 10 (init -> ID = expression .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+    AND             shift and go to state 57
+    OR              shift and go to state 58
+    EQ              shift and go to state 59
+    NEQ             shift and go to state 60
+    >               shift and go to state 61
+    <               shift and go to state 62
+    LE              shift and go to state 63
+    GE              shift and go to state 64
+
+
+state 86
+
+    (21) assignment -> ID = expression ; .
+
+    TYPE            reduce using rule 21 (assignment -> ID = expression ; .)
+    error           reduce using rule 21 (assignment -> ID = expression ; .)
+    PRINT           reduce using rule 21 (assignment -> ID = expression ; .)
+    ID              reduce using rule 21 (assignment -> ID = expression ; .)
+    IF              reduce using rule 21 (assignment -> ID = expression ; .)
+    WHILE           reduce using rule 21 (assignment -> ID = expression ; .)
+    RETURN          reduce using rule 21 (assignment -> ID = expression ; .)
+    {               reduce using rule 21 (assignment -> ID = expression ; .)
+    $end            reduce using rule 21 (assignment -> ID = expression ; .)
+    }               reduce using rule 21 (assignment -> ID = expression ; .)
+    ELSE            reduce using rule 21 (assignment -> ID = expression ; .)
+
+
+state 87
+
+    (54) arithmetic_expr -> expression + expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               reduce using rule 54 (arithmetic_expr -> expression + expression .)
+    +               reduce using rule 54 (arithmetic_expr -> expression + expression .)
+    -               reduce using rule 54 (arithmetic_expr -> expression + expression .)
+    AND             reduce using rule 54 (arithmetic_expr -> expression + expression .)
+    OR              reduce using rule 54 (arithmetic_expr -> expression + expression .)
+    EQ              reduce using rule 54 (arithmetic_expr -> expression + expression .)
+    NEQ             reduce using rule 54 (arithmetic_expr -> expression + expression .)
+    >               reduce using rule 54 (arithmetic_expr -> expression + expression .)
+    <               reduce using rule 54 (arithmetic_expr -> expression + expression .)
+    LE              reduce using rule 54 (arithmetic_expr -> expression + expression .)
+    GE              reduce using rule 54 (arithmetic_expr -> expression + expression .)
+    )               reduce using rule 54 (arithmetic_expr -> expression + expression .)
+    ,               reduce using rule 54 (arithmetic_expr -> expression + expression .)
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+
+  ! *               [ reduce using rule 54 (arithmetic_expr -> expression + expression .) ]
+  ! /               [ reduce using rule 54 (arithmetic_expr -> expression + expression .) ]
+  ! %               [ reduce using rule 54 (arithmetic_expr -> expression + expression .) ]
+  ! +               [ shift and go to state 52 ]
+  ! -               [ shift and go to state 53 ]
+  ! AND             [ shift and go to state 57 ]
+  ! OR              [ shift and go to state 58 ]
+  ! EQ              [ shift and go to state 59 ]
+  ! NEQ             [ shift and go to state 60 ]
+  ! >               [ shift and go to state 61 ]
+  ! <               [ shift and go to state 62 ]
+  ! LE              [ shift and go to state 63 ]
+  ! GE              [ shift and go to state 64 ]
+
+
+state 88
+
+    (55) arithmetic_expr -> expression - expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               reduce using rule 55 (arithmetic_expr -> expression - expression .)
+    +               reduce using rule 55 (arithmetic_expr -> expression - expression .)
+    -               reduce using rule 55 (arithmetic_expr -> expression - expression .)
+    AND             reduce using rule 55 (arithmetic_expr -> expression - expression .)
+    OR              reduce using rule 55 (arithmetic_expr -> expression - expression .)
+    EQ              reduce using rule 55 (arithmetic_expr -> expression - expression .)
+    NEQ             reduce using rule 55 (arithmetic_expr -> expression - expression .)
+    >               reduce using rule 55 (arithmetic_expr -> expression - expression .)
+    <               reduce using rule 55 (arithmetic_expr -> expression - expression .)
+    LE              reduce using rule 55 (arithmetic_expr -> expression - expression .)
+    GE              reduce using rule 55 (arithmetic_expr -> expression - expression .)
+    )               reduce using rule 55 (arithmetic_expr -> expression - expression .)
+    ,               reduce using rule 55 (arithmetic_expr -> expression - expression .)
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+
+  ! *               [ reduce using rule 55 (arithmetic_expr -> expression - expression .) ]
+  ! /               [ reduce using rule 55 (arithmetic_expr -> expression - expression .) ]
+  ! %               [ reduce using rule 55 (arithmetic_expr -> expression - expression .) ]
+  ! +               [ shift and go to state 52 ]
+  ! -               [ shift and go to state 53 ]
+  ! AND             [ shift and go to state 57 ]
+  ! OR              [ shift and go to state 58 ]
+  ! EQ              [ shift and go to state 59 ]
+  ! NEQ             [ shift and go to state 60 ]
+  ! >               [ shift and go to state 61 ]
+  ! <               [ shift and go to state 62 ]
+  ! LE              [ shift and go to state 63 ]
+  ! GE              [ shift and go to state 64 ]
+
+
+state 89
+
+    (56) arithmetic_expr -> expression * expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               reduce using rule 56 (arithmetic_expr -> expression * expression .)
+    +               reduce using rule 56 (arithmetic_expr -> expression * expression .)
+    -               reduce using rule 56 (arithmetic_expr -> expression * expression .)
+    *               reduce using rule 56 (arithmetic_expr -> expression * expression .)
+    /               reduce using rule 56 (arithmetic_expr -> expression * expression .)
+    %               reduce using rule 56 (arithmetic_expr -> expression * expression .)
+    AND             reduce using rule 56 (arithmetic_expr -> expression * expression .)
+    OR              reduce using rule 56 (arithmetic_expr -> expression * expression .)
+    EQ              reduce using rule 56 (arithmetic_expr -> expression * expression .)
+    NEQ             reduce using rule 56 (arithmetic_expr -> expression * expression .)
+    >               reduce using rule 56 (arithmetic_expr -> expression * expression .)
+    <               reduce using rule 56 (arithmetic_expr -> expression * expression .)
+    LE              reduce using rule 56 (arithmetic_expr -> expression * expression .)
+    GE              reduce using rule 56 (arithmetic_expr -> expression * expression .)
+    )               reduce using rule 56 (arithmetic_expr -> expression * expression .)
+    ,               reduce using rule 56 (arithmetic_expr -> expression * expression .)
+
+  ! +               [ shift and go to state 52 ]
+  ! -               [ shift and go to state 53 ]
+  ! *               [ shift and go to state 54 ]
+  ! /               [ shift and go to state 55 ]
+  ! %               [ shift and go to state 56 ]
+  ! AND             [ shift and go to state 57 ]
+  ! OR              [ shift and go to state 58 ]
+  ! EQ              [ shift and go to state 59 ]
+  ! NEQ             [ shift and go to state 60 ]
+  ! >               [ shift and go to state 61 ]
+  ! <               [ shift and go to state 62 ]
+  ! LE              [ shift and go to state 63 ]
+  ! GE              [ shift and go to state 64 ]
+
+
+state 90
+
+    (57) arithmetic_expr -> expression / expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               reduce using rule 57 (arithmetic_expr -> expression / expression .)
+    +               reduce using rule 57 (arithmetic_expr -> expression / expression .)
+    -               reduce using rule 57 (arithmetic_expr -> expression / expression .)
+    *               reduce using rule 57 (arithmetic_expr -> expression / expression .)
+    /               reduce using rule 57 (arithmetic_expr -> expression / expression .)
+    %               reduce using rule 57 (arithmetic_expr -> expression / expression .)
+    AND             reduce using rule 57 (arithmetic_expr -> expression / expression .)
+    OR              reduce using rule 57 (arithmetic_expr -> expression / expression .)
+    EQ              reduce using rule 57 (arithmetic_expr -> expression / expression .)
+    NEQ             reduce using rule 57 (arithmetic_expr -> expression / expression .)
+    >               reduce using rule 57 (arithmetic_expr -> expression / expression .)
+    <               reduce using rule 57 (arithmetic_expr -> expression / expression .)
+    LE              reduce using rule 57 (arithmetic_expr -> expression / expression .)
+    GE              reduce using rule 57 (arithmetic_expr -> expression / expression .)
+    )               reduce using rule 57 (arithmetic_expr -> expression / expression .)
+    ,               reduce using rule 57 (arithmetic_expr -> expression / expression .)
+
+  ! +               [ shift and go to state 52 ]
+  ! -               [ shift and go to state 53 ]
+  ! *               [ shift and go to state 54 ]
+  ! /               [ shift and go to state 55 ]
+  ! %               [ shift and go to state 56 ]
+  ! AND             [ shift and go to state 57 ]
+  ! OR              [ shift and go to state 58 ]
+  ! EQ              [ shift and go to state 59 ]
+  ! NEQ             [ shift and go to state 60 ]
+  ! >               [ shift and go to state 61 ]
+  ! <               [ shift and go to state 62 ]
+  ! LE              [ shift and go to state 63 ]
+  ! GE              [ shift and go to state 64 ]
+
+
+state 91
+
+    (58) arithmetic_expr -> expression % expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               reduce using rule 58 (arithmetic_expr -> expression % expression .)
+    +               reduce using rule 58 (arithmetic_expr -> expression % expression .)
+    -               reduce using rule 58 (arithmetic_expr -> expression % expression .)
+    *               reduce using rule 58 (arithmetic_expr -> expression % expression .)
+    /               reduce using rule 58 (arithmetic_expr -> expression % expression .)
+    %               reduce using rule 58 (arithmetic_expr -> expression % expression .)
+    AND             reduce using rule 58 (arithmetic_expr -> expression % expression .)
+    OR              reduce using rule 58 (arithmetic_expr -> expression % expression .)
+    EQ              reduce using rule 58 (arithmetic_expr -> expression % expression .)
+    NEQ             reduce using rule 58 (arithmetic_expr -> expression % expression .)
+    >               reduce using rule 58 (arithmetic_expr -> expression % expression .)
+    <               reduce using rule 58 (arithmetic_expr -> expression % expression .)
+    LE              reduce using rule 58 (arithmetic_expr -> expression % expression .)
+    GE              reduce using rule 58 (arithmetic_expr -> expression % expression .)
+    )               reduce using rule 58 (arithmetic_expr -> expression % expression .)
+    ,               reduce using rule 58 (arithmetic_expr -> expression % expression .)
+
+  ! +               [ shift and go to state 52 ]
+  ! -               [ shift and go to state 53 ]
+  ! *               [ shift and go to state 54 ]
+  ! /               [ shift and go to state 55 ]
+  ! %               [ shift and go to state 56 ]
+  ! AND             [ shift and go to state 57 ]
+  ! OR              [ shift and go to state 58 ]
+  ! EQ              [ shift and go to state 59 ]
+  ! NEQ             [ shift and go to state 60 ]
+  ! >               [ shift and go to state 61 ]
+  ! <               [ shift and go to state 62 ]
+  ! LE              [ shift and go to state 63 ]
+  ! GE              [ shift and go to state 64 ]
+
+
+state 92
+
+    (46) logical_expr -> expression AND expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               reduce using rule 46 (logical_expr -> expression AND expression .)
+    AND             reduce using rule 46 (logical_expr -> expression AND expression .)
+    OR              reduce using rule 46 (logical_expr -> expression AND expression .)
+    )               reduce using rule 46 (logical_expr -> expression AND expression .)
+    ,               reduce using rule 46 (logical_expr -> expression AND expression .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+    EQ              shift and go to state 59
+    NEQ             shift and go to state 60
+    >               shift and go to state 61
+    <               shift and go to state 62
+    LE              shift and go to state 63
+    GE              shift and go to state 64
+
+  ! +               [ reduce using rule 46 (logical_expr -> expression AND expression .) ]
+  ! -               [ reduce using rule 46 (logical_expr -> expression AND expression .) ]
+  ! *               [ reduce using rule 46 (logical_expr -> expression AND expression .) ]
+  ! /               [ reduce using rule 46 (logical_expr -> expression AND expression .) ]
+  ! %               [ reduce using rule 46 (logical_expr -> expression AND expression .) ]
+  ! EQ              [ reduce using rule 46 (logical_expr -> expression AND expression .) ]
+  ! NEQ             [ reduce using rule 46 (logical_expr -> expression AND expression .) ]
+  ! >               [ reduce using rule 46 (logical_expr -> expression AND expression .) ]
+  ! <               [ reduce using rule 46 (logical_expr -> expression AND expression .) ]
+  ! LE              [ reduce using rule 46 (logical_expr -> expression AND expression .) ]
+  ! GE              [ reduce using rule 46 (logical_expr -> expression AND expression .) ]
+  ! AND             [ shift and go to state 57 ]
+  ! OR              [ shift and go to state 58 ]
+
+
+state 93
+
+    (47) logical_expr -> expression OR expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               reduce using rule 47 (logical_expr -> expression OR expression .)
+    OR              reduce using rule 47 (logical_expr -> expression OR expression .)
+    )               reduce using rule 47 (logical_expr -> expression OR expression .)
+    ,               reduce using rule 47 (logical_expr -> expression OR expression .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+    AND             shift and go to state 57
+    EQ              shift and go to state 59
+    NEQ             shift and go to state 60
+    >               shift and go to state 61
+    <               shift and go to state 62
+    LE              shift and go to state 63
+    GE              shift and go to state 64
+
+  ! +               [ reduce using rule 47 (logical_expr -> expression OR expression .) ]
+  ! -               [ reduce using rule 47 (logical_expr -> expression OR expression .) ]
+  ! *               [ reduce using rule 47 (logical_expr -> expression OR expression .) ]
+  ! /               [ reduce using rule 47 (logical_expr -> expression OR expression .) ]
+  ! %               [ reduce using rule 47 (logical_expr -> expression OR expression .) ]
+  ! AND             [ reduce using rule 47 (logical_expr -> expression OR expression .) ]
+  ! EQ              [ reduce using rule 47 (logical_expr -> expression OR expression .) ]
+  ! NEQ             [ reduce using rule 47 (logical_expr -> expression OR expression .) ]
+  ! >               [ reduce using rule 47 (logical_expr -> expression OR expression .) ]
+  ! <               [ reduce using rule 47 (logical_expr -> expression OR expression .) ]
+  ! LE              [ reduce using rule 47 (logical_expr -> expression OR expression .) ]
+  ! GE              [ reduce using rule 47 (logical_expr -> expression OR expression .) ]
+  ! OR              [ shift and go to state 58 ]
+
+
+state 94
+
+    (48) comparison_expr -> expression EQ expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               reduce using rule 48 (comparison_expr -> expression EQ expression .)
+    AND             reduce using rule 48 (comparison_expr -> expression EQ expression .)
+    OR              reduce using rule 48 (comparison_expr -> expression EQ expression .)
+    EQ              reduce using rule 48 (comparison_expr -> expression EQ expression .)
+    NEQ             reduce using rule 48 (comparison_expr -> expression EQ expression .)
+    >               reduce using rule 48 (comparison_expr -> expression EQ expression .)
+    <               reduce using rule 48 (comparison_expr -> expression EQ expression .)
+    LE              reduce using rule 48 (comparison_expr -> expression EQ expression .)
+    GE              reduce using rule 48 (comparison_expr -> expression EQ expression .)
+    )               reduce using rule 48 (comparison_expr -> expression EQ expression .)
+    ,               reduce using rule 48 (comparison_expr -> expression EQ expression .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+
+  ! +               [ reduce using rule 48 (comparison_expr -> expression EQ expression .) ]
+  ! -               [ reduce using rule 48 (comparison_expr -> expression EQ expression .) ]
+  ! *               [ reduce using rule 48 (comparison_expr -> expression EQ expression .) ]
+  ! /               [ reduce using rule 48 (comparison_expr -> expression EQ expression .) ]
+  ! %               [ reduce using rule 48 (comparison_expr -> expression EQ expression .) ]
+  ! AND             [ shift and go to state 57 ]
+  ! OR              [ shift and go to state 58 ]
+  ! EQ              [ shift and go to state 59 ]
+  ! NEQ             [ shift and go to state 60 ]
+  ! >               [ shift and go to state 61 ]
+  ! <               [ shift and go to state 62 ]
+  ! LE              [ shift and go to state 63 ]
+  ! GE              [ shift and go to state 64 ]
+
+
+state 95
+
+    (49) comparison_expr -> expression NEQ expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               reduce using rule 49 (comparison_expr -> expression NEQ expression .)
+    AND             reduce using rule 49 (comparison_expr -> expression NEQ expression .)
+    OR              reduce using rule 49 (comparison_expr -> expression NEQ expression .)
+    EQ              reduce using rule 49 (comparison_expr -> expression NEQ expression .)
+    NEQ             reduce using rule 49 (comparison_expr -> expression NEQ expression .)
+    >               reduce using rule 49 (comparison_expr -> expression NEQ expression .)
+    <               reduce using rule 49 (comparison_expr -> expression NEQ expression .)
+    LE              reduce using rule 49 (comparison_expr -> expression NEQ expression .)
+    GE              reduce using rule 49 (comparison_expr -> expression NEQ expression .)
+    )               reduce using rule 49 (comparison_expr -> expression NEQ expression .)
+    ,               reduce using rule 49 (comparison_expr -> expression NEQ expression .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+
+  ! +               [ reduce using rule 49 (comparison_expr -> expression NEQ expression .) ]
+  ! -               [ reduce using rule 49 (comparison_expr -> expression NEQ expression .) ]
+  ! *               [ reduce using rule 49 (comparison_expr -> expression NEQ expression .) ]
+  ! /               [ reduce using rule 49 (comparison_expr -> expression NEQ expression .) ]
+  ! %               [ reduce using rule 49 (comparison_expr -> expression NEQ expression .) ]
+  ! AND             [ shift and go to state 57 ]
+  ! OR              [ shift and go to state 58 ]
+  ! EQ              [ shift and go to state 59 ]
+  ! NEQ             [ shift and go to state 60 ]
+  ! >               [ shift and go to state 61 ]
+  ! <               [ shift and go to state 62 ]
+  ! LE              [ shift and go to state 63 ]
+  ! GE              [ shift and go to state 64 ]
+
+
+state 96
+
+    (50) comparison_expr -> expression > expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               reduce using rule 50 (comparison_expr -> expression > expression .)
+    AND             reduce using rule 50 (comparison_expr -> expression > expression .)
+    OR              reduce using rule 50 (comparison_expr -> expression > expression .)
+    EQ              reduce using rule 50 (comparison_expr -> expression > expression .)
+    NEQ             reduce using rule 50 (comparison_expr -> expression > expression .)
+    >               reduce using rule 50 (comparison_expr -> expression > expression .)
+    <               reduce using rule 50 (comparison_expr -> expression > expression .)
+    LE              reduce using rule 50 (comparison_expr -> expression > expression .)
+    GE              reduce using rule 50 (comparison_expr -> expression > expression .)
+    )               reduce using rule 50 (comparison_expr -> expression > expression .)
+    ,               reduce using rule 50 (comparison_expr -> expression > expression .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+
+  ! +               [ reduce using rule 50 (comparison_expr -> expression > expression .) ]
+  ! -               [ reduce using rule 50 (comparison_expr -> expression > expression .) ]
+  ! *               [ reduce using rule 50 (comparison_expr -> expression > expression .) ]
+  ! /               [ reduce using rule 50 (comparison_expr -> expression > expression .) ]
+  ! %               [ reduce using rule 50 (comparison_expr -> expression > expression .) ]
+  ! AND             [ shift and go to state 57 ]
+  ! OR              [ shift and go to state 58 ]
+  ! EQ              [ shift and go to state 59 ]
+  ! NEQ             [ shift and go to state 60 ]
+  ! >               [ shift and go to state 61 ]
+  ! <               [ shift and go to state 62 ]
+  ! LE              [ shift and go to state 63 ]
+  ! GE              [ shift and go to state 64 ]
+
+
+state 97
+
+    (51) comparison_expr -> expression < expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               reduce using rule 51 (comparison_expr -> expression < expression .)
+    AND             reduce using rule 51 (comparison_expr -> expression < expression .)
+    OR              reduce using rule 51 (comparison_expr -> expression < expression .)
+    EQ              reduce using rule 51 (comparison_expr -> expression < expression .)
+    NEQ             reduce using rule 51 (comparison_expr -> expression < expression .)
+    >               reduce using rule 51 (comparison_expr -> expression < expression .)
+    <               reduce using rule 51 (comparison_expr -> expression < expression .)
+    LE              reduce using rule 51 (comparison_expr -> expression < expression .)
+    GE              reduce using rule 51 (comparison_expr -> expression < expression .)
+    )               reduce using rule 51 (comparison_expr -> expression < expression .)
+    ,               reduce using rule 51 (comparison_expr -> expression < expression .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+
+  ! +               [ reduce using rule 51 (comparison_expr -> expression < expression .) ]
+  ! -               [ reduce using rule 51 (comparison_expr -> expression < expression .) ]
+  ! *               [ reduce using rule 51 (comparison_expr -> expression < expression .) ]
+  ! /               [ reduce using rule 51 (comparison_expr -> expression < expression .) ]
+  ! %               [ reduce using rule 51 (comparison_expr -> expression < expression .) ]
+  ! AND             [ shift and go to state 57 ]
+  ! OR              [ shift and go to state 58 ]
+  ! EQ              [ shift and go to state 59 ]
+  ! NEQ             [ shift and go to state 60 ]
+  ! >               [ shift and go to state 61 ]
+  ! <               [ shift and go to state 62 ]
+  ! LE              [ shift and go to state 63 ]
+  ! GE              [ shift and go to state 64 ]
+
+
+state 98
+
+    (52) comparison_expr -> expression LE expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               reduce using rule 52 (comparison_expr -> expression LE expression .)
+    AND             reduce using rule 52 (comparison_expr -> expression LE expression .)
+    OR              reduce using rule 52 (comparison_expr -> expression LE expression .)
+    EQ              reduce using rule 52 (comparison_expr -> expression LE expression .)
+    NEQ             reduce using rule 52 (comparison_expr -> expression LE expression .)
+    >               reduce using rule 52 (comparison_expr -> expression LE expression .)
+    <               reduce using rule 52 (comparison_expr -> expression LE expression .)
+    LE              reduce using rule 52 (comparison_expr -> expression LE expression .)
+    GE              reduce using rule 52 (comparison_expr -> expression LE expression .)
+    )               reduce using rule 52 (comparison_expr -> expression LE expression .)
+    ,               reduce using rule 52 (comparison_expr -> expression LE expression .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+
+  ! +               [ reduce using rule 52 (comparison_expr -> expression LE expression .) ]
+  ! -               [ reduce using rule 52 (comparison_expr -> expression LE expression .) ]
+  ! *               [ reduce using rule 52 (comparison_expr -> expression LE expression .) ]
+  ! /               [ reduce using rule 52 (comparison_expr -> expression LE expression .) ]
+  ! %               [ reduce using rule 52 (comparison_expr -> expression LE expression .) ]
+  ! AND             [ shift and go to state 57 ]
+  ! OR              [ shift and go to state 58 ]
+  ! EQ              [ shift and go to state 59 ]
+  ! NEQ             [ shift and go to state 60 ]
+  ! >               [ shift and go to state 61 ]
+  ! <               [ shift and go to state 62 ]
+  ! LE              [ shift and go to state 63 ]
+  ! GE              [ shift and go to state 64 ]
+
+
+state 99
+
+    (53) comparison_expr -> expression GE expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ;               reduce using rule 53 (comparison_expr -> expression GE expression .)
+    AND             reduce using rule 53 (comparison_expr -> expression GE expression .)
+    OR              reduce using rule 53 (comparison_expr -> expression GE expression .)
+    EQ              reduce using rule 53 (comparison_expr -> expression GE expression .)
+    NEQ             reduce using rule 53 (comparison_expr -> expression GE expression .)
+    >               reduce using rule 53 (comparison_expr -> expression GE expression .)
+    <               reduce using rule 53 (comparison_expr -> expression GE expression .)
+    LE              reduce using rule 53 (comparison_expr -> expression GE expression .)
+    GE              reduce using rule 53 (comparison_expr -> expression GE expression .)
+    )               reduce using rule 53 (comparison_expr -> expression GE expression .)
+    ,               reduce using rule 53 (comparison_expr -> expression GE expression .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+
+  ! +               [ reduce using rule 53 (comparison_expr -> expression GE expression .) ]
+  ! -               [ reduce using rule 53 (comparison_expr -> expression GE expression .) ]
+  ! *               [ reduce using rule 53 (comparison_expr -> expression GE expression .) ]
+  ! /               [ reduce using rule 53 (comparison_expr -> expression GE expression .) ]
+  ! %               [ reduce using rule 53 (comparison_expr -> expression GE expression .) ]
+  ! AND             [ shift and go to state 57 ]
+  ! OR              [ shift and go to state 58 ]
+  ! EQ              [ shift and go to state 59 ]
+  ! NEQ             [ shift and go to state 60 ]
+  ! >               [ shift and go to state 61 ]
+  ! <               [ shift and go to state 62 ]
+  ! LE              [ shift and go to state 63 ]
+  ! GE              [ shift and go to state 64 ]
+
+
+state 100
+
+    (43) expression -> ( expression ) .
+
+    ;               reduce using rule 43 (expression -> ( expression ) .)
+    +               reduce using rule 43 (expression -> ( expression ) .)
+    -               reduce using rule 43 (expression -> ( expression ) .)
+    *               reduce using rule 43 (expression -> ( expression ) .)
+    /               reduce using rule 43 (expression -> ( expression ) .)
+    %               reduce using rule 43 (expression -> ( expression ) .)
+    AND             reduce using rule 43 (expression -> ( expression ) .)
+    OR              reduce using rule 43 (expression -> ( expression ) .)
+    EQ              reduce using rule 43 (expression -> ( expression ) .)
+    NEQ             reduce using rule 43 (expression -> ( expression ) .)
+    >               reduce using rule 43 (expression -> ( expression ) .)
+    <               reduce using rule 43 (expression -> ( expression ) .)
+    LE              reduce using rule 43 (expression -> ( expression ) .)
+    GE              reduce using rule 43 (expression -> ( expression ) .)
+    )               reduce using rule 43 (expression -> ( expression ) .)
+    ,               reduce using rule 43 (expression -> ( expression ) .)
+
+
+state 101
+
+    (44) expression -> ( error ) .
+
+    ;               reduce using rule 44 (expression -> ( error ) .)
+    +               reduce using rule 44 (expression -> ( error ) .)
+    -               reduce using rule 44 (expression -> ( error ) .)
+    *               reduce using rule 44 (expression -> ( error ) .)
+    /               reduce using rule 44 (expression -> ( error ) .)
+    %               reduce using rule 44 (expression -> ( error ) .)
+    AND             reduce using rule 44 (expression -> ( error ) .)
+    OR              reduce using rule 44 (expression -> ( error ) .)
+    EQ              reduce using rule 44 (expression -> ( error ) .)
+    NEQ             reduce using rule 44 (expression -> ( error ) .)
+    >               reduce using rule 44 (expression -> ( error ) .)
+    <               reduce using rule 44 (expression -> ( error ) .)
+    LE              reduce using rule 44 (expression -> ( error ) .)
+    GE              reduce using rule 44 (expression -> ( error ) .)
+    )               reduce using rule 44 (expression -> ( error ) .)
+    ,               reduce using rule 44 (expression -> ( error ) .)
+
+
+state 102
+
+    (59) funcall -> ID ( expr_list_or_empty . )
+
+    )               shift and go to state 113
+
+
+state 103
+
+    (60) funcall -> ID ( error . )
+
+    )               shift and go to state 114
+
+
+state 104
+
+    (61) expr_list_or_empty -> expr_list .
+    (63) expr_list -> expr_list . , expression
+
+    )               reduce using rule 61 (expr_list_or_empty -> expr_list .)
+    ,               shift and go to state 115
+
+
+state 105
+
+    (64) expr_list -> expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ,               reduce using rule 64 (expr_list -> expression .)
+    )               reduce using rule 64 (expr_list -> expression .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+    AND             shift and go to state 57
+    OR              shift and go to state 58
+    EQ              shift and go to state 59
+    NEQ             shift and go to state 60
+    >               shift and go to state 61
+    <               shift and go to state 62
+    LE              shift and go to state 63
+    GE              shift and go to state 64
+
+
+state 106
+
+    (22) choice_instr -> IF ( condition ) . instruction
+    (23) choice_instr -> IF ( condition ) . instruction ELSE instruction
+    (11) instruction -> . print_instr
+    (12) instruction -> . labeled_instr
+    (13) instruction -> . assignment
+    (14) instruction -> . choice_instr
+    (15) instruction -> . while_instr
+    (16) instruction -> . return_instr
+    (17) instruction -> . compound_instr
+    (18) print_instr -> . PRINT expression ;
+    (19) print_instr -> . PRINT error ;
+    (20) labeled_instr -> . ID : instruction
+    (21) assignment -> . ID = expression ;
+    (22) choice_instr -> . IF ( condition ) instruction
+    (23) choice_instr -> . IF ( condition ) instruction ELSE instruction
+    (24) choice_instr -> . IF ( error ) instruction
+    (25) choice_instr -> . IF ( error ) instruction ELSE instruction
+    (26) while_instr -> . WHILE ( condition ) instruction
+    (27) while_instr -> . WHILE ( error ) instruction
+    (28) return_instr -> . RETURN expression ;
+    (32) compound_instr -> . { declarations_or_instructions }
+
+    PRINT           shift and go to state 16
+    ID              shift and go to state 8
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    RETURN          shift and go to state 19
+    {               shift and go to state 20
+
+    instruction                    shift and go to state 116
+    print_instr                    shift and go to state 10
+    labeled_instr                  shift and go to state 11
+    assignment                     shift and go to state 12
+    choice_instr                   shift and go to state 13
+    while_instr                    shift and go to state 14
+    return_instr                   shift and go to state 15
+    compound_instr                 shift and go to state 9
+
+state 107
+
+    (24) choice_instr -> IF ( error ) . instruction
+    (25) choice_instr -> IF ( error ) . instruction ELSE instruction
+    (11) instruction -> . print_instr
+    (12) instruction -> . labeled_instr
+    (13) instruction -> . assignment
+    (14) instruction -> . choice_instr
+    (15) instruction -> . while_instr
+    (16) instruction -> . return_instr
+    (17) instruction -> . compound_instr
+    (18) print_instr -> . PRINT expression ;
+    (19) print_instr -> . PRINT error ;
+    (20) labeled_instr -> . ID : instruction
+    (21) assignment -> . ID = expression ;
+    (22) choice_instr -> . IF ( condition ) instruction
+    (23) choice_instr -> . IF ( condition ) instruction ELSE instruction
+    (24) choice_instr -> . IF ( error ) instruction
+    (25) choice_instr -> . IF ( error ) instruction ELSE instruction
+    (26) while_instr -> . WHILE ( condition ) instruction
+    (27) while_instr -> . WHILE ( error ) instruction
+    (28) return_instr -> . RETURN expression ;
+    (32) compound_instr -> . { declarations_or_instructions }
+
+    PRINT           shift and go to state 16
+    ID              shift and go to state 8
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    RETURN          shift and go to state 19
+    {               shift and go to state 20
+
+    instruction                    shift and go to state 117
+    print_instr                    shift and go to state 10
+    labeled_instr                  shift and go to state 11
+    assignment                     shift and go to state 12
+    choice_instr                   shift and go to state 13
+    while_instr                    shift and go to state 14
+    return_instr                   shift and go to state 15
+    compound_instr                 shift and go to state 9
+
+state 108
+
+    (26) while_instr -> WHILE ( condition ) . instruction
+    (11) instruction -> . print_instr
+    (12) instruction -> . labeled_instr
+    (13) instruction -> . assignment
+    (14) instruction -> . choice_instr
+    (15) instruction -> . while_instr
+    (16) instruction -> . return_instr
+    (17) instruction -> . compound_instr
+    (18) print_instr -> . PRINT expression ;
+    (19) print_instr -> . PRINT error ;
+    (20) labeled_instr -> . ID : instruction
+    (21) assignment -> . ID = expression ;
+    (22) choice_instr -> . IF ( condition ) instruction
+    (23) choice_instr -> . IF ( condition ) instruction ELSE instruction
+    (24) choice_instr -> . IF ( error ) instruction
+    (25) choice_instr -> . IF ( error ) instruction ELSE instruction
+    (26) while_instr -> . WHILE ( condition ) instruction
+    (27) while_instr -> . WHILE ( error ) instruction
+    (28) return_instr -> . RETURN expression ;
+    (32) compound_instr -> . { declarations_or_instructions }
+
+    PRINT           shift and go to state 16
+    ID              shift and go to state 8
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    RETURN          shift and go to state 19
+    {               shift and go to state 20
+
+    instruction                    shift and go to state 118
+    print_instr                    shift and go to state 10
+    labeled_instr                  shift and go to state 11
+    assignment                     shift and go to state 12
+    choice_instr                   shift and go to state 13
+    while_instr                    shift and go to state 14
+    return_instr                   shift and go to state 15
+    compound_instr                 shift and go to state 9
+
+state 109
+
+    (27) while_instr -> WHILE ( error ) . instruction
+    (11) instruction -> . print_instr
+    (12) instruction -> . labeled_instr
+    (13) instruction -> . assignment
+    (14) instruction -> . choice_instr
+    (15) instruction -> . while_instr
+    (16) instruction -> . return_instr
+    (17) instruction -> . compound_instr
+    (18) print_instr -> . PRINT expression ;
+    (19) print_instr -> . PRINT error ;
+    (20) labeled_instr -> . ID : instruction
+    (21) assignment -> . ID = expression ;
+    (22) choice_instr -> . IF ( condition ) instruction
+    (23) choice_instr -> . IF ( condition ) instruction ELSE instruction
+    (24) choice_instr -> . IF ( error ) instruction
+    (25) choice_instr -> . IF ( error ) instruction ELSE instruction
+    (26) while_instr -> . WHILE ( condition ) instruction
+    (27) while_instr -> . WHILE ( error ) instruction
+    (28) return_instr -> . RETURN expression ;
+    (32) compound_instr -> . { declarations_or_instructions }
+
+    PRINT           shift and go to state 16
+    ID              shift and go to state 8
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    RETURN          shift and go to state 19
+    {               shift and go to state 20
+
+    instruction                    shift and go to state 119
+    print_instr                    shift and go to state 10
+    labeled_instr                  shift and go to state 11
+    assignment                     shift and go to state 12
+    choice_instr                   shift and go to state 13
+    while_instr                    shift and go to state 14
+    return_instr                   shift and go to state 15
+    compound_instr                 shift and go to state 9
+
+state 110
+
+    (70) arg -> TYPE ID .
+
+    ,               reduce using rule 70 (arg -> TYPE ID .)
+    )               reduce using rule 70 (arg -> TYPE ID .)
+
+
+state 111
+
+    (65) fundef -> TYPE ID ( args_list_or_empty ) . compound_instr
+    (32) compound_instr -> . { declarations_or_instructions }
+
+    {               shift and go to state 20
+
+    compound_instr                 shift and go to state 120
+
+state 112
+
+    (68) args_list -> args_list , . arg
+    (70) arg -> . TYPE ID
+
+    TYPE            shift and go to state 81
+
+    arg                            shift and go to state 121
+
+state 113
+
+    (59) funcall -> ID ( expr_list_or_empty ) .
+
+    ;               reduce using rule 59 (funcall -> ID ( expr_list_or_empty ) .)
+    +               reduce using rule 59 (funcall -> ID ( expr_list_or_empty ) .)
+    -               reduce using rule 59 (funcall -> ID ( expr_list_or_empty ) .)
+    *               reduce using rule 59 (funcall -> ID ( expr_list_or_empty ) .)
+    /               reduce using rule 59 (funcall -> ID ( expr_list_or_empty ) .)
+    %               reduce using rule 59 (funcall -> ID ( expr_list_or_empty ) .)
+    AND             reduce using rule 59 (funcall -> ID ( expr_list_or_empty ) .)
+    OR              reduce using rule 59 (funcall -> ID ( expr_list_or_empty ) .)
+    EQ              reduce using rule 59 (funcall -> ID ( expr_list_or_empty ) .)
+    NEQ             reduce using rule 59 (funcall -> ID ( expr_list_or_empty ) .)
+    >               reduce using rule 59 (funcall -> ID ( expr_list_or_empty ) .)
+    <               reduce using rule 59 (funcall -> ID ( expr_list_or_empty ) .)
+    LE              reduce using rule 59 (funcall -> ID ( expr_list_or_empty ) .)
+    GE              reduce using rule 59 (funcall -> ID ( expr_list_or_empty ) .)
+    )               reduce using rule 59 (funcall -> ID ( expr_list_or_empty ) .)
+    ,               reduce using rule 59 (funcall -> ID ( expr_list_or_empty ) .)
+
+
+state 114
+
+    (60) funcall -> ID ( error ) .
+
+    ;               reduce using rule 60 (funcall -> ID ( error ) .)
+    +               reduce using rule 60 (funcall -> ID ( error ) .)
+    -               reduce using rule 60 (funcall -> ID ( error ) .)
+    *               reduce using rule 60 (funcall -> ID ( error ) .)
+    /               reduce using rule 60 (funcall -> ID ( error ) .)
+    %               reduce using rule 60 (funcall -> ID ( error ) .)
+    AND             reduce using rule 60 (funcall -> ID ( error ) .)
+    OR              reduce using rule 60 (funcall -> ID ( error ) .)
+    EQ              reduce using rule 60 (funcall -> ID ( error ) .)
+    NEQ             reduce using rule 60 (funcall -> ID ( error ) .)
+    >               reduce using rule 60 (funcall -> ID ( error ) .)
+    <               reduce using rule 60 (funcall -> ID ( error ) .)
+    LE              reduce using rule 60 (funcall -> ID ( error ) .)
+    GE              reduce using rule 60 (funcall -> ID ( error ) .)
+    )               reduce using rule 60 (funcall -> ID ( error ) .)
+    ,               reduce using rule 60 (funcall -> ID ( error ) .)
+
+
+state 115
+
+    (63) expr_list -> expr_list , . expression
+    (38) expression -> . const
+    (39) expression -> . variable
+    (40) expression -> . arithmetic_expr
+    (41) expression -> . logical_expr
+    (42) expression -> . comparison_expr
+    (43) expression -> . ( expression )
+    (44) expression -> . ( error )
+    (45) expression -> . funcall
+    (34) const -> . INTEGER
+    (35) const -> . FLOAT
+    (36) const -> . STRING
+    (37) variable -> . ID
+    (54) arithmetic_expr -> . expression + expression
+    (55) arithmetic_expr -> . expression - expression
+    (56) arithmetic_expr -> . expression * expression
+    (57) arithmetic_expr -> . expression / expression
+    (58) arithmetic_expr -> . expression % expression
+    (46) logical_expr -> . expression AND expression
+    (47) logical_expr -> . expression OR expression
+    (48) comparison_expr -> . expression EQ expression
+    (49) comparison_expr -> . expression NEQ expression
+    (50) comparison_expr -> . expression > expression
+    (51) comparison_expr -> . expression < expression
+    (52) comparison_expr -> . expression LE expression
+    (53) comparison_expr -> . expression GE expression
+    (59) funcall -> . ID ( expr_list_or_empty )
+    (60) funcall -> . ID ( error )
+
+    (               shift and go to state 35
+    INTEGER         shift and go to state 37
+    FLOAT           shift and go to state 38
+    STRING          shift and go to state 39
+    ID              shift and go to state 40
+
+    expression                     shift and go to state 122
+    const                          shift and go to state 30
+    variable                       shift and go to state 31
+    arithmetic_expr                shift and go to state 32
+    logical_expr                   shift and go to state 33
+    comparison_expr                shift and go to state 34
+    funcall                        shift and go to state 36
+
+state 116
+
+    (22) choice_instr -> IF ( condition ) instruction .
+    (23) choice_instr -> IF ( condition ) instruction . ELSE instruction
+
+    TYPE            reduce using rule 22 (choice_instr -> IF ( condition ) instruction .)
+    error           reduce using rule 22 (choice_instr -> IF ( condition ) instruction .)
+    PRINT           reduce using rule 22 (choice_instr -> IF ( condition ) instruction .)
+    ID              reduce using rule 22 (choice_instr -> IF ( condition ) instruction .)
+    IF              reduce using rule 22 (choice_instr -> IF ( condition ) instruction .)
+    WHILE           reduce using rule 22 (choice_instr -> IF ( condition ) instruction .)
+    RETURN          reduce using rule 22 (choice_instr -> IF ( condition ) instruction .)
+    {               reduce using rule 22 (choice_instr -> IF ( condition ) instruction .)
+    $end            reduce using rule 22 (choice_instr -> IF ( condition ) instruction .)
+    }               reduce using rule 22 (choice_instr -> IF ( condition ) instruction .)
+    ELSE            shift and go to state 123
+
+  ! ELSE            [ reduce using rule 22 (choice_instr -> IF ( condition ) instruction .) ]
+
+
+state 117
+
+    (24) choice_instr -> IF ( error ) instruction .
+    (25) choice_instr -> IF ( error ) instruction . ELSE instruction
+
+    TYPE            reduce using rule 24 (choice_instr -> IF ( error ) instruction .)
+    error           reduce using rule 24 (choice_instr -> IF ( error ) instruction .)
+    PRINT           reduce using rule 24 (choice_instr -> IF ( error ) instruction .)
+    ID              reduce using rule 24 (choice_instr -> IF ( error ) instruction .)
+    IF              reduce using rule 24 (choice_instr -> IF ( error ) instruction .)
+    WHILE           reduce using rule 24 (choice_instr -> IF ( error ) instruction .)
+    RETURN          reduce using rule 24 (choice_instr -> IF ( error ) instruction .)
+    {               reduce using rule 24 (choice_instr -> IF ( error ) instruction .)
+    $end            reduce using rule 24 (choice_instr -> IF ( error ) instruction .)
+    }               reduce using rule 24 (choice_instr -> IF ( error ) instruction .)
+    ELSE            shift and go to state 124
+
+  ! ELSE            [ reduce using rule 24 (choice_instr -> IF ( error ) instruction .) ]
+
+
+state 118
+
+    (26) while_instr -> WHILE ( condition ) instruction .
+
+    TYPE            reduce using rule 26 (while_instr -> WHILE ( condition ) instruction .)
+    error           reduce using rule 26 (while_instr -> WHILE ( condition ) instruction .)
+    PRINT           reduce using rule 26 (while_instr -> WHILE ( condition ) instruction .)
+    ID              reduce using rule 26 (while_instr -> WHILE ( condition ) instruction .)
+    IF              reduce using rule 26 (while_instr -> WHILE ( condition ) instruction .)
+    WHILE           reduce using rule 26 (while_instr -> WHILE ( condition ) instruction .)
+    RETURN          reduce using rule 26 (while_instr -> WHILE ( condition ) instruction .)
+    {               reduce using rule 26 (while_instr -> WHILE ( condition ) instruction .)
+    $end            reduce using rule 26 (while_instr -> WHILE ( condition ) instruction .)
+    }               reduce using rule 26 (while_instr -> WHILE ( condition ) instruction .)
+    ELSE            reduce using rule 26 (while_instr -> WHILE ( condition ) instruction .)
+
+
+state 119
+
+    (27) while_instr -> WHILE ( error ) instruction .
+
+    TYPE            reduce using rule 27 (while_instr -> WHILE ( error ) instruction .)
+    error           reduce using rule 27 (while_instr -> WHILE ( error ) instruction .)
+    PRINT           reduce using rule 27 (while_instr -> WHILE ( error ) instruction .)
+    ID              reduce using rule 27 (while_instr -> WHILE ( error ) instruction .)
+    IF              reduce using rule 27 (while_instr -> WHILE ( error ) instruction .)
+    WHILE           reduce using rule 27 (while_instr -> WHILE ( error ) instruction .)
+    RETURN          reduce using rule 27 (while_instr -> WHILE ( error ) instruction .)
+    {               reduce using rule 27 (while_instr -> WHILE ( error ) instruction .)
+    $end            reduce using rule 27 (while_instr -> WHILE ( error ) instruction .)
+    }               reduce using rule 27 (while_instr -> WHILE ( error ) instruction .)
+    ELSE            reduce using rule 27 (while_instr -> WHILE ( error ) instruction .)
+
+
+state 120
+
+    (65) fundef -> TYPE ID ( args_list_or_empty ) compound_instr .
+
+    TYPE            reduce using rule 65 (fundef -> TYPE ID ( args_list_or_empty ) compound_instr .)
+    error           reduce using rule 65 (fundef -> TYPE ID ( args_list_or_empty ) compound_instr .)
+    PRINT           reduce using rule 65 (fundef -> TYPE ID ( args_list_or_empty ) compound_instr .)
+    ID              reduce using rule 65 (fundef -> TYPE ID ( args_list_or_empty ) compound_instr .)
+    IF              reduce using rule 65 (fundef -> TYPE ID ( args_list_or_empty ) compound_instr .)
+    WHILE           reduce using rule 65 (fundef -> TYPE ID ( args_list_or_empty ) compound_instr .)
+    RETURN          reduce using rule 65 (fundef -> TYPE ID ( args_list_or_empty ) compound_instr .)
+    {               reduce using rule 65 (fundef -> TYPE ID ( args_list_or_empty ) compound_instr .)
+    $end            reduce using rule 65 (fundef -> TYPE ID ( args_list_or_empty ) compound_instr .)
+
+
+state 121
+
+    (68) args_list -> args_list , arg .
+
+    ,               reduce using rule 68 (args_list -> args_list , arg .)
+    )               reduce using rule 68 (args_list -> args_list , arg .)
+
+
+state 122
+
+    (63) expr_list -> expr_list , expression .
+    (54) arithmetic_expr -> expression . + expression
+    (55) arithmetic_expr -> expression . - expression
+    (56) arithmetic_expr -> expression . * expression
+    (57) arithmetic_expr -> expression . / expression
+    (58) arithmetic_expr -> expression . % expression
+    (46) logical_expr -> expression . AND expression
+    (47) logical_expr -> expression . OR expression
+    (48) comparison_expr -> expression . EQ expression
+    (49) comparison_expr -> expression . NEQ expression
+    (50) comparison_expr -> expression . > expression
+    (51) comparison_expr -> expression . < expression
+    (52) comparison_expr -> expression . LE expression
+    (53) comparison_expr -> expression . GE expression
+
+    ,               reduce using rule 63 (expr_list -> expr_list , expression .)
+    )               reduce using rule 63 (expr_list -> expr_list , expression .)
+    +               shift and go to state 52
+    -               shift and go to state 53
+    *               shift and go to state 54
+    /               shift and go to state 55
+    %               shift and go to state 56
+    AND             shift and go to state 57
+    OR              shift and go to state 58
+    EQ              shift and go to state 59
+    NEQ             shift and go to state 60
+    >               shift and go to state 61
+    <               shift and go to state 62
+    LE              shift and go to state 63
+    GE              shift and go to state 64
+
+
+state 123
+
+    (23) choice_instr -> IF ( condition ) instruction ELSE . instruction
+    (11) instruction -> . print_instr
+    (12) instruction -> . labeled_instr
+    (13) instruction -> . assignment
+    (14) instruction -> . choice_instr
+    (15) instruction -> . while_instr
+    (16) instruction -> . return_instr
+    (17) instruction -> . compound_instr
+    (18) print_instr -> . PRINT expression ;
+    (19) print_instr -> . PRINT error ;
+    (20) labeled_instr -> . ID : instruction
+    (21) assignment -> . ID = expression ;
+    (22) choice_instr -> . IF ( condition ) instruction
+    (23) choice_instr -> . IF ( condition ) instruction ELSE instruction
+    (24) choice_instr -> . IF ( error ) instruction
+    (25) choice_instr -> . IF ( error ) instruction ELSE instruction
+    (26) while_instr -> . WHILE ( condition ) instruction
+    (27) while_instr -> . WHILE ( error ) instruction
+    (28) return_instr -> . RETURN expression ;
+    (32) compound_instr -> . { declarations_or_instructions }
+
+    PRINT           shift and go to state 16
+    ID              shift and go to state 8
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    RETURN          shift and go to state 19
+    {               shift and go to state 20
+
+    instruction                    shift and go to state 125
+    print_instr                    shift and go to state 10
+    labeled_instr                  shift and go to state 11
+    assignment                     shift and go to state 12
+    choice_instr                   shift and go to state 13
+    while_instr                    shift and go to state 14
+    return_instr                   shift and go to state 15
+    compound_instr                 shift and go to state 9
+
+state 124
+
+    (25) choice_instr -> IF ( error ) instruction ELSE . instruction
+    (11) instruction -> . print_instr
+    (12) instruction -> . labeled_instr
+    (13) instruction -> . assignment
+    (14) instruction -> . choice_instr
+    (15) instruction -> . while_instr
+    (16) instruction -> . return_instr
+    (17) instruction -> . compound_instr
+    (18) print_instr -> . PRINT expression ;
+    (19) print_instr -> . PRINT error ;
+    (20) labeled_instr -> . ID : instruction
+    (21) assignment -> . ID = expression ;
+    (22) choice_instr -> . IF ( condition ) instruction
+    (23) choice_instr -> . IF ( condition ) instruction ELSE instruction
+    (24) choice_instr -> . IF ( error ) instruction
+    (25) choice_instr -> . IF ( error ) instruction ELSE instruction
+    (26) while_instr -> . WHILE ( condition ) instruction
+    (27) while_instr -> . WHILE ( error ) instruction
+    (28) return_instr -> . RETURN expression ;
+    (32) compound_instr -> . { declarations_or_instructions }
+
+    PRINT           shift and go to state 16
+    ID              shift and go to state 8
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    RETURN          shift and go to state 19
+    {               shift and go to state 20
+
+    instruction                    shift and go to state 126
+    print_instr                    shift and go to state 10
+    labeled_instr                  shift and go to state 11
+    assignment                     shift and go to state 12
+    choice_instr                   shift and go to state 13
+    while_instr                    shift and go to state 14
+    return_instr                   shift and go to state 15
+    compound_instr                 shift and go to state 9
+
+state 125
+
+    (23) choice_instr -> IF ( condition ) instruction ELSE instruction .
+
+    TYPE            reduce using rule 23 (choice_instr -> IF ( condition ) instruction ELSE instruction .)
+    error           reduce using rule 23 (choice_instr -> IF ( condition ) instruction ELSE instruction .)
+    PRINT           reduce using rule 23 (choice_instr -> IF ( condition ) instruction ELSE instruction .)
+    ID              reduce using rule 23 (choice_instr -> IF ( condition ) instruction ELSE instruction .)
+    IF              reduce using rule 23 (choice_instr -> IF ( condition ) instruction ELSE instruction .)
+    WHILE           reduce using rule 23 (choice_instr -> IF ( condition ) instruction ELSE instruction .)
+    RETURN          reduce using rule 23 (choice_instr -> IF ( condition ) instruction ELSE instruction .)
+    {               reduce using rule 23 (choice_instr -> IF ( condition ) instruction ELSE instruction .)
+    $end            reduce using rule 23 (choice_instr -> IF ( condition ) instruction ELSE instruction .)
+    }               reduce using rule 23 (choice_instr -> IF ( condition ) instruction ELSE instruction .)
+    ELSE            reduce using rule 23 (choice_instr -> IF ( condition ) instruction ELSE instruction .)
+
+
+state 126
+
+    (25) choice_instr -> IF ( error ) instruction ELSE instruction .
+
+    TYPE            reduce using rule 25 (choice_instr -> IF ( error ) instruction ELSE instruction .)
+    error           reduce using rule 25 (choice_instr -> IF ( error ) instruction ELSE instruction .)
+    PRINT           reduce using rule 25 (choice_instr -> IF ( error ) instruction ELSE instruction .)
+    ID              reduce using rule 25 (choice_instr -> IF ( error ) instruction ELSE instruction .)
+    IF              reduce using rule 25 (choice_instr -> IF ( error ) instruction ELSE instruction .)
+    WHILE           reduce using rule 25 (choice_instr -> IF ( error ) instruction ELSE instruction .)
+    RETURN          reduce using rule 25 (choice_instr -> IF ( error ) instruction ELSE instruction .)
+    {               reduce using rule 25 (choice_instr -> IF ( error ) instruction ELSE instruction .)
+    $end            reduce using rule 25 (choice_instr -> IF ( error ) instruction ELSE instruction .)
+    }               reduce using rule 25 (choice_instr -> IF ( error ) instruction ELSE instruction .)
+    ELSE            reduce using rule 25 (choice_instr -> IF ( error ) instruction ELSE instruction .)
+

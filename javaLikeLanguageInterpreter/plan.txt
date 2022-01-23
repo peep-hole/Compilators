@@ -1,0 +1,18 @@
+TOKENS:
+    variables
+    numbers (different forms)
+    key words:
+        - for loop
+        - while loop
+        - if, elif, else statements
+        - booleans
+        - classes
+        - functions
+    duck typing to types in java (somehow)
+    spaces to brackets (somehow)
+    data structures:
+         - arrays (maybe not needed)
+         - lists
+
+
+NOTES:
